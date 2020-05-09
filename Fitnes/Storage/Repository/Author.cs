@@ -10,7 +10,7 @@ namespace Fitnes.Storage.Repository {
     public class Author {
         [Key]
         [Required]
-        public Guid AuthorId { get; set; }
+        public int AuthorId { get; set; }
 
         [Required]
         [MaxLength(50)]

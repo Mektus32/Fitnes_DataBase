@@ -10,10 +10,10 @@ namespace Fitnes.Storage.Repository {
     [Table("GymTrainingMachine")]
     
     public class GymTrainingMachine {
-        public Guid? GymId { get; set; }
+        public int? GymId { get; set; }
         public Gym Gym { get; set; }
 
-        public Guid? TrainingMachineId { get; set; }
+        public int? TrainingMachineId { get; set; }
         public TrainingMachine TrainingMachine { get; set; }
     }
 }

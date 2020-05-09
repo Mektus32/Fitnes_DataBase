@@ -10,18 +10,18 @@ namespace Fitnes.Storage.Repository {
     public class ProgramWorkout {
         [Key]
         [Required]
-        public Guid ProgramWorkoutId { get; set; }
+        public int ProgramWorkoutId { get; set; }
 
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
 
         [Required]
-        public Guid? AuthorId { get; set; }
+        public int? AuthorId { get; set; }
         [ForeignKey(nameof(AuthorId))]
         public Author Author { get; set; }
 
         [Required]
-        public DateTime Period { get; set; }
+        public double Period { get; set; }
     }
 }

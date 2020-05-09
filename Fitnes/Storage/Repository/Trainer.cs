@@ -10,13 +10,13 @@ namespace Fitnes.Storage.Repository {
     public class Trainer {
         [Required]
         [Key]
-        public Guid TrainerId { get; set; }
+        public int TrainerId { get; set; }
 
-        public Guid? ProgramWorkoutId { get; set; }
+        public int? ProgramWorkoutId { get; set; }
         [ForeignKey(nameof(ProgramWorkoutId))]
         public ProgramWorkout ProgramWorkout {get; set; }
 
-        public Guid? EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
         [ForeignKey(nameof(EmployeeId))]
         public Employee Employee { get; set; }
     }

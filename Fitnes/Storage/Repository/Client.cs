@@ -10,7 +10,7 @@ namespace Fitnes.Storage.Repository {
     public class Client {
         [Key]
         [Required]
-        public Guid ClientId { get; set; }
+        public int ClientId { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -20,11 +20,11 @@ namespace Fitnes.Storage.Repository {
         [MaxLength(50)]
         public string LastName { get; set; }
 
-        public Guid? TrainerId { get; set; }
+        public int? TrainerId { get; set; }
         [ForeignKey(nameof(TrainerId))]
         public Trainer Trainer { get; set; }
 
-        public Guid? SubscriptionId { get; set; }
+        public int? SubscriptionId { get; set; }
         [ForeignKey(nameof(SubscriptionId))]
         public Subscription Subscription { get; set; }
     }

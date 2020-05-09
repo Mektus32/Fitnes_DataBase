@@ -10,7 +10,7 @@ namespace Fitnes.Storage.Repository {
     public class TrainingMachine{
         [Key]
         [Required]
-        public Guid TrainingMachineId { get; set; }
+        public int TrainingMachineId { get; set; }
 
         [Required]
         [MaxLength(50)]

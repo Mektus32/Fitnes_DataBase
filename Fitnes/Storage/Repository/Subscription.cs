@@ -10,7 +10,7 @@ namespace Fitnes.Storage.Repository {
     public class Subscription {
         [Key]
         [Required]
-        public Guid SubscriptionId { get; set; }
+        public int SubscriptionId { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -19,6 +19,6 @@ namespace Fitnes.Storage.Repository {
         public ushort Price { get; set; }
 
         [Required]
-        public DateTime Time { get; set; }
+        public double Time { get; set; }
     }
 }

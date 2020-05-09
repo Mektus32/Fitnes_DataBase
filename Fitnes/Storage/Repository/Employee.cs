@@ -10,13 +10,13 @@ namespace Fitnes.Storage.Repository {
     public class Employee {
         [Key]
         [Required]
-        public Guid EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
 
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
 
-        public Guid? PositionId { get; set; }
+        public int? PositionId { get; set; }
         [ForeignKey(nameof(PositionId))]
         public Position Position { get; set; }
 
@@ -26,7 +26,7 @@ namespace Fitnes.Storage.Repository {
         [Required]
         public ushort Salary { get; set; }
 
-        public Guid? GymId { get; set; }
+        public int? GymId { get; set; }
         [ForeignKey(nameof(GymId))]
         public Gym Gym { get; set; }
     }

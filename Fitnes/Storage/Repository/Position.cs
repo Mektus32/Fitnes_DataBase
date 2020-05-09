@@ -10,7 +10,7 @@ namespace Fitnes.Storage.Repository {
     public class Position {
         [Key]
         [Required]
-        public Guid PositionId { get; set; }
+        public int PositionId { get; set; }
 
         [Required]
         [MaxLength(50)]
