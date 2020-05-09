@@ -14,13 +14,9 @@ namespace Fitnes.Storage.Repository {
         public GymTrainingMachine(FitnesDbContext fitnesDbContext) {
             this.fitnesDbContext = fitnesDbContext;
         }
-        [Required]
-        [Column("GymId")]
         public Guid? GymId { get; set; }
         public Gym Gym { get; set; }
 
-        [Required]
-        [Column("TrainingMachineId")]
         public Guid? TrainingMachineId { get; set; }
         public TrainingMachine TrainingMachine { get; set; }
     }
