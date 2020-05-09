@@ -8,10 +8,6 @@ using System.Threading.Tasks;
 namespace Fitnes.Storage.Repository {
     [Table("Subscription")]
     public class Subscription {
-        private readonly FitnesDbContext fitnesDbContext;
-        public Subscription(FitnesDbContext fitnesDbContext) {
-            this.fitnesDbContext = fitnesDbContext;
-        }
         [Key]
         [Required]
         public Guid SubscriptionId { get; set; }

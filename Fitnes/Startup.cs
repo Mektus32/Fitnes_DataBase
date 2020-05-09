@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Fitnes {
     public class Startup {
         private IConfigurationRoot _confString;
-            
+
         public Startup(IHostingEnvironment hostEnv) {
             _confString = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).AddJsonFile("FitnesDbSettings.json").Build();
         }
@@ -38,5 +38,6 @@ namespace Fitnes {
                 template: "{controller=Calculate}/{action=MainPage}");
             });
         }
+
     }
 }

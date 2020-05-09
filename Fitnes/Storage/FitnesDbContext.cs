@@ -33,6 +33,10 @@ namespace Fitnes.Storage {
                 .HasOne(pt => pt.TrainingMachine)
                 .WithMany(t => t.GymTrainingMachines)
                 .HasForeignKey(pt => pt.TrainingMachineId);
+            modelBuilder.Entity<Client>().HasData(
+                new Client[] {
+                    new Client { ClientId = Guid.NewGuid(), Name = "Mike", LastName = "Tarasyan", TrainerId = null, SubscriptionId = null }
+                });
         }
     }
 }
