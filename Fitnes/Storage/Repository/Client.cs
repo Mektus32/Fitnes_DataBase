@@ -26,9 +26,8 @@ namespace Fitnes.Storage.Repository {
         [ForeignKey(nameof(TrainerId))]
         public Trainer Trainer { get; set; }
 
-        [Required]
         [Column("Subsription")]
-        public Guid SubscriptionId { get; set; }
+        public Guid? SubscriptionId { get; set; }
         [ForeignKey(nameof(SubscriptionId))]
         public Subscription Subscription { get; set; }
     }

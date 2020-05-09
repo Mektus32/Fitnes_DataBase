@@ -16,6 +16,9 @@ namespace Fitnes.Storage.Repository {
         [Required]
         [Column("TrainingMachineId")]
         public Guid TrainingMachineId { get; set; }
+
+        [Required]
+        [Column("Name")]
         public string Name { get; set; }
 
         [Required]

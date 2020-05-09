@@ -16,12 +16,12 @@ namespace Fitnes.Storage.Repository {
         }
         [Required]
         [Column("GymId")]
-        public Guid GymId { get; set; }
+        public Guid? GymId { get; set; }
         public Gym Gym { get; set; }
 
         [Required]
         [Column("TrainingMachineId")]
-        public Guid TrainingMachineId { get; set; }
+        public Guid? TrainingMachineId { get; set; }
         public TrainingMachine TrainingMachine { get; set; }
     }
 }

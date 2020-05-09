@@ -48,7 +48,7 @@ namespace Fitnes.Storage.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("SubscriptionId")
+                    b.Property<Guid?>("SubscriptionId")
                         .HasColumnName("Subsription")
                         .HasColumnType("uniqueidentifier");
 
@@ -75,14 +75,16 @@ namespace Fitnes.Storage.Migrations
                         .HasColumnName("Experience")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("GymId")
+                    b.Property<Guid?>("GymId")
+                        .IsRequired()
                         .HasColumnName("GymId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PositionId")
+                    b.Property<Guid?>("PositionId")
+                        .IsRequired()
                         .HasColumnName("PositionId")
                         .HasColumnType("uniqueidentifier");
 
@@ -112,6 +114,8 @@ namespace Fitnes.Storage.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GymId");
@@ -121,11 +125,11 @@ namespace Fitnes.Storage.Migrations
 
             modelBuilder.Entity("Fitnes.Storage.Repository.GymTrainingMachine", b =>
                 {
-                    b.Property<Guid>("GymId")
+                    b.Property<Guid?>("GymId")
                         .HasColumnName("GymId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TrainingMachineId")
+                    b.Property<Guid?>("TrainingMachineId")
                         .HasColumnName("TrainingMachineId")
                         .HasColumnType("uniqueidentifier");
 
@@ -156,7 +160,8 @@ namespace Fitnes.Storage.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AuthorId")
+                    b.Property<Guid?>("AuthorId")
+                        .IsRequired()
                         .HasColumnName("AuthorId")
                         .HasColumnType("uniqueidentifier");
 
@@ -187,7 +192,8 @@ namespace Fitnes.Storage.Migrations
                         .HasColumnName("Price")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ProgramWorkoutId")
+                    b.Property<Guid?>("ProgramWorkoutId")
+                        .IsRequired()
                         .HasColumnName("ProgramWorkoutId")
                         .HasColumnType("uniqueidentifier");
 
@@ -205,11 +211,13 @@ namespace Fitnes.Storage.Migrations
                         .HasColumnName("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("EmployeeId")
+                    b.Property<Guid?>("EmployeeId")
+                        .IsRequired()
                         .HasColumnName("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ProgramWorkoutId")
+                    b.Property<Guid?>("ProgramWorkoutId")
+                        .IsRequired()
                         .HasColumnName("ProgramWorkoutId")
                         .HasColumnType("uniqueidentifier");
 
@@ -242,6 +250,8 @@ namespace Fitnes.Storage.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TrainingMachineId");
@@ -253,9 +263,7 @@ namespace Fitnes.Storage.Migrations
                 {
                     b.HasOne("Fitnes.Storage.Repository.Subscription", "Subscription")
                         .WithMany()
-                        .HasForeignKey("SubscriptionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SubscriptionId");
 
                     b.HasOne("Fitnes.Storage.Repository.Trainer", "Trainer")
                         .WithMany()

@@ -17,7 +17,7 @@ namespace Fitnes.Storage.Repository {
 
         [Required]
         [Column("AuthorId")]
-        public Guid AuthorId { get; set; }
+        public Guid? AuthorId { get; set; }
         [ForeignKey(nameof(AuthorId))]
         public Author Author { get; set; }
 

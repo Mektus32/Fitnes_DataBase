@@ -17,7 +17,7 @@ namespace Fitnes.Storage.Repository {
 
         [Required]
         [Column("PositionId")]
-        public Guid PositionId { get; set; }
+        public Guid? PositionId { get; set; }
         [ForeignKey(nameof(PositionId))]
         public Position Position { get; set; }
 
@@ -31,7 +31,7 @@ namespace Fitnes.Storage.Repository {
 
         [Required]
         [Column("GymId")]
-        public Guid GymId { get; set; }
+        public Guid? GymId { get; set; }
         [ForeignKey(nameof(GymId))]
         public Gym Gym { get; set; }
     }

@@ -24,7 +24,7 @@ namespace Fitnes.Storage.Migrations
                 columns: table => new
                 {
                     GymId = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     Adress = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -49,7 +49,7 @@ namespace Fitnes.Storage.Migrations
                 columns: table => new
                 {
                     TrainingMachineId = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     IsForHand = table.Column<bool>(nullable: false),
                     IsForLeg = table.Column<bool>(nullable: false),
                     IsForBack = table.Column<bool>(nullable: false)
@@ -184,7 +184,7 @@ namespace Fitnes.Storage.Migrations
                     Name = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     TrainerId = table.Column<Guid>(nullable: true),
-                    Subsription = table.Column<Guid>(nullable: false)
+                    Subsription = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -194,7 +194,7 @@ namespace Fitnes.Storage.Migrations
                         column: x => x.Subsription,
                         principalTable: "Subscription",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Client_Trainer_TrainerId",
                         column: x => x.TrainerId,

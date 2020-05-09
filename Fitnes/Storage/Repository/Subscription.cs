@@ -21,7 +21,7 @@ namespace Fitnes.Storage.Repository {
 
         [Required]
         [Column("ProgramWorkoutId")]
-        public Guid ProgramWorkoutId { get; set; }
+        public Guid? ProgramWorkoutId { get; set; }
         [ForeignKey(nameof(ProgramWorkoutId))]
         public ProgramWorkout ProgramWorkout { get; set; }
     }
