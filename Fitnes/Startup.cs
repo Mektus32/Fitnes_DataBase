@@ -35,7 +35,7 @@ namespace Fitnes {
             app.UseMvc(routes => {
                 routes.MapRoute(
                 name: "default",
-                template: "{controller=Calculate}/{action=MainPage}");
+                template: "{controller=Main}/{action=MainPage}");
             });
         }
 

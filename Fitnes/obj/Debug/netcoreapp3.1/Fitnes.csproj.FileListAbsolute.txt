@@ -256,3 +256,13 @@ C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\staticweba
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Fitnes.dll
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Fitnes.pdb
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Fitnes.genruntimeconfig.cache
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\bin\Debug\netcoreapp3.1\Fitnes.Views.dll
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\bin\Debug\netcoreapp3.1\Fitnes.Views.pdb
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Fitnes.RazorAssemblyInfo.cache
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Fitnes.RazorAssemblyInfo.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Fitnes.TagHelpers.input.cache
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Fitnes.TagHelpers.output.cache
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Fitnes.RazorCoreGenerate.cache
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Fitnes.RazorTargetAssemblyInfo.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Fitnes.Views.pdb
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Main\MainPage.cshtml.g.cs
