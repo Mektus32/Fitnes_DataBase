@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace Fitnes.Storage.Repository {
     [Table("Subscription")]
-    public class Subscription : IUniqueIdentifyEntity {
+    public class Subscription {
         private readonly FitnesDbContext fitnesDbContext;
         public Subscription(FitnesDbContext fitnesDbContext) {
             this.fitnesDbContext = fitnesDbContext;
         }
-        public Guid Id { get; set; }
+        [Key]
+        [Required]
+        public Guid SubscriptionId { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
         [Required]
-        [Column("Price")]
         public ushort Price { get; set; }
 
         [Required]
-        [Column("ProgramWorkoutId")]
-        public Guid ProgramWorkoutId { get; set; }
-        [ForeignKey(nameof(ProgramWorkoutId))]
-        public ProgramWorkout ProgramWorkout { get; set; }
+        public DateTime Time { get; set; }
     }
 }

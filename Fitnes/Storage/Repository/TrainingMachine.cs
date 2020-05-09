@@ -14,20 +14,19 @@ namespace Fitnes.Storage.Repository {
         }
         [Key]
         [Required]
-        [Column("TrainingMachineId")]
         public Guid TrainingMachineId { get; set; }
+
+        [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
 
         [Required]
-        [Column("IsForHand")]
         public bool IsForHand { get; set; }
 
         [Required]
-        [Column("IsForLeg")]
         public bool IsForLeg { get; set; }
 
         [Required]
-        [Column("IsForBack")]
         public bool IsForBack { get; set; }
 
         public List<GymTrainingMachine> GymTrainingMachines { get; set; }

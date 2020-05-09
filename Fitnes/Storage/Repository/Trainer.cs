@@ -14,18 +14,13 @@ namespace Fitnes.Storage.Repository {
         }
         [Required]
         [Key]
-        [Column("Id")]
-        public Guid Id { get; set; }
+        public Guid TrainerId { get; set; }
 
-        [Required]
-        [Column("ProgramWorkoutId")]
-        public Guid ProgramWorkoutId { get; set; }
+        public Guid? ProgramWorkoutId { get; set; }
         [ForeignKey(nameof(ProgramWorkoutId))]
         public ProgramWorkout ProgramWorkout {get; set; }
 
-        [Required]
-        [Column("EmployeeId")]
-        public Guid EmployeeId { get; set; }
+        public Guid? EmployeeId { get; set; }
         [ForeignKey(nameof(EmployeeId))]
         public Employee Employee { get; set; }
     }

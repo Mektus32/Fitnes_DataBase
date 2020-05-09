@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace Fitnes.Storage.Repository {
     [Table("Author")]
-    public class Author : IUniqueIdentifyEntity {
+    public class Author {
         private readonly FitnesDbContext fitnesDbContext;
         public Author(FitnesDbContext fitnesDbContext) {
             this.fitnesDbContext = fitnesDbContext;
         }
-        public Guid Id { get; set; }
+        [Key]
+        [Required]
+        public Guid AuthorId { get; set; }
+
+        [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
     }
 }
