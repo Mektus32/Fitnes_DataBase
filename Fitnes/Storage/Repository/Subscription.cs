@@ -14,7 +14,7 @@ namespace Fitnes.Storage.Repository {
         }
         [Key]
         [Required]
-        public Guid Id { get; set; }
+        public Guid SubscriptionId { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -22,8 +22,7 @@ namespace Fitnes.Storage.Repository {
         [Required]
         public ushort Price { get; set; }
 
-        public Guid? ProgramWorkoutId { get; set; }
-        [ForeignKey(nameof(ProgramWorkoutId))]
-        public ProgramWorkout ProgramWorkout { get; set; }
+        [Required]
+        public DateTime Time { get; set; }
     }
 }

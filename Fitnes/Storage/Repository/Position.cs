@@ -15,7 +15,7 @@ namespace Fitnes.Storage.Repository {
 
         [Key]
         [Required]
-        public Guid Id { get; set; }
+        public Guid PositionId { get; set; }
 
         [Required]
         [MaxLength(50)]
