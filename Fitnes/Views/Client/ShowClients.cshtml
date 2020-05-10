@@ -1,0 +1,10 @@
+﻿@using Fitnes.Storage.Manager.Clients
+@model List<ClientWithTrainerAndSubscriptionsName>
+@{
+    ViewData["Title"] = "ShowClients";
+}
+@foreach (var elem in Model) {
+    <a>@elem.Name</a>
+}
+<h1></h1>
+

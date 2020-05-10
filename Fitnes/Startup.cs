@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Fitnes.Manager.Clients;
 using Fitnes.Storage;
+using Fitnes.Storage.Manager.Authors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +24,8 @@ namespace Fitnes {
         public void ConfigureServices(IServiceCollection services) {
             services.AddDbContext<FitnesDbContext>(options => options.UseSqlServer(_confString.GetConnectionString("DefaultConnection")));
             services.AddMvc(option => option.EnableEndpointRouting = false);
-            //services.AddTransient<INumberSystemManager, DecimalCalculatorManager>();
+            services.AddTransient<IAuthorManager, AuthorManager>();
+            services.AddTransient<IClientManager, ClientManager>();
 
         }
 
@@ -35,7 +38,7 @@ namespace Fitnes {
             app.UseMvc(routes => {
                 routes.MapRoute(
                 name: "default",
-                template: "{controller=Main}/{action=MainPage}");
+                template: "{controller=Client}/{action=ShowClients}");
             });
         }
 

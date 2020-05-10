@@ -6,5 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fitnes.Manager.Clients {
     public class CreateOrUpdateClientRequest {
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public int TrainerId { get; set; }
+        public int SubscriptionId { get; set; }
     }
 }

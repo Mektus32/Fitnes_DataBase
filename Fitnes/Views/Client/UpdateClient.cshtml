@@ -1,0 +1,7 @@
+﻿@using Fitnes.Storage.Repository
+@model (Client, (List<KeyValuePair<int, string>>, List<KeyValuePair<int, string>>))
+@{
+    ViewData["Title"] = "UpdateClient";
+}
+
+<h1>@Model.Item2.Item1[0].Value</h1>

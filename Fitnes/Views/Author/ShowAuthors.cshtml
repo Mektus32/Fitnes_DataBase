@@ -1,0 +1,10 @@
+﻿@using Fitnes.Storage.Repository
+@model IEnumerable<Author> 
+@{
+    ViewData["Title"] = "ShowAuthors";
+}
+
+@foreach (var elem in Model) {
+    <p>@elem.Name</p>
+}
+

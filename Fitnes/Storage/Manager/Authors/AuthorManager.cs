@@ -22,7 +22,7 @@ namespace Fitnes.Storage.Manager.Authors {
         }
 
         public void DeleteAuthor(int id) {
-            context.Authors.Remove(context.Authors.Find(id));//TODO check exeption
+            context.Authors.Remove(context.Authors.Find(id));//TODO check exception
             context.SaveChanges();
         }
 
@@ -31,11 +31,14 @@ namespace Fitnes.Storage.Manager.Authors {
         }
 
         public async Task<Author> GetAuthorById(int id) {
-            return await context.Authors.FindAsync(id);
+            var entity = await context.Authors.FindAsync(id);
+            if (entity == null)
+                throw new ArgumentNullException();
+            return entity;
         }
 
         public async void UpdateAuthor(int id, CreateOrUpdateAuthorRequest request) {
-            var auth = await context.Authors.FindAsync(id);//TODO check exeption
+            var auth = await context.Authors.FindAsync(id);//TODO check exception
             auth.Name = request.Name;
             await context.SaveChangesAsync();
         }
