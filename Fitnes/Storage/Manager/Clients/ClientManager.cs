@@ -14,20 +14,20 @@ namespace Fitnes.Storage.Manager.Clients {
             context = fitnesDbContext;
         }
 
-        public void AddClient(CreateOrUpdateClientRequest request) {
+        public async Task AddClient(CreateOrUpdateClientRequest request) {
             var client = new Client {
                 Name = request.Name,
                 LastName = request.LastName,
                 TrainerId = request.TrainerId != 0 ? request.TrainerId : null,
                 SubscriptionId = request.SubscriptionId != 0 ? request.SubscriptionId : null
             };
-            context.Clients.Add(client);
-            context.SaveChanges();
+            await context.Clients.AddAsync(client);
+            await context.SaveChangesAsync();
         }
 
-        public void DeleteClient(int id) {
+        public async Task DeleteClient(int id) {
             context.Clients.Remove(context.Clients.Find(id));
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public async Task<IReadOnlyCollection<ClientWithTrainerAndSubscriptionsName>> GetAll() {
@@ -51,13 +51,13 @@ namespace Fitnes.Storage.Manager.Clients {
                 throw new ArgumentNullException();
             return entity;
         }
-        public void UpdateClient(int id, CreateOrUpdateClientRequest request) {
+        public async Task UpdateClient(int id, CreateOrUpdateClientRequest request) {
             var client = context.Clients.Find(id);
             client.Name = request.Name;
             client.LastName = request.LastName;
             client.TrainerId = request.TrainerId != 0 ? request.TrainerId : null;
             client.SubscriptionId = request.SubscriptionId != 0 ? request.SubscriptionId : null;
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
         public async Task<(List<KeyValuePair<int, string>>, List<KeyValuePair<int, string>>)> CreateListForViewCreateClient() {
             List<KeyValuePair<int, string>> listTrainers = new List<KeyValuePair<int, string>>();

@@ -21,15 +21,15 @@ namespace Fitnes.Controllers
             var entitys = await _manager.GetAll();
             return View(entitys);
         }
-        public ViewResult CreateGym() {
-            var tup = _manager.CreateListWithTrainingMachines(null);
+        public async Task<ViewResult> CreateGym() {
+            var tup = await _manager.CreateListWithTrainingMachines(null);
             return View(tup);
         }
 
         [HttpPost]
-        public ActionResult Create(CreateOrUpdateGymRequest request) {
+        public async Task<ActionResult> Create(CreateOrUpdateGymRequest request) {
             try {
-                _manager.AddGym(request);
+                 await _manager.AddGym(request);
                 return RedirectToAction(nameof(ShowGyms));
             }
             catch (ArgumentNullException) {
@@ -40,7 +40,7 @@ namespace Fitnes.Controllers
         public async Task<ActionResult> UpdateGym(int id) {
             try {
                 var entity = await _manager.GetGymById(id);
-                var tmp = _manager.CreateListWithTrainingMachines(id);
+                var tmp = await _manager.CreateListWithTrainingMachines(id);
                 var tup = (entity, tmp);
                 return View(tup);
             }
@@ -49,9 +49,9 @@ namespace Fitnes.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Update(int id, CreateOrUpdateGymRequest request) {
+        public async Task<ActionResult> Update(int id, CreateOrUpdateGymRequest request) {
             try {
-                _manager.UpdateGym(id, request);
+                await _manager.UpdateGym(id, request);
                 return RedirectToAction(nameof(ShowGyms));
             }
             catch (ArgumentNullException) {
@@ -60,9 +60,9 @@ namespace Fitnes.Controllers
 
         }
         [HttpGet]
-        public ActionResult DeleteGym(int id) {
+        public async Task<ActionResult> DeleteGym(int id) {
             try {
-                _manager.DeleteGym(id);
+                await _manager.DeleteGym(id);
                 return RedirectToAction(nameof(ShowGyms));
             }
             catch (ArgumentNullException) {

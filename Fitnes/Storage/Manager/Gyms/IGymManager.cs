@@ -10,8 +10,8 @@ namespace Fitnes.Storage.Manager.Gyms {
         public Task<IReadOnlyCollection<GymWithTrainingMachines>> GetAll();
         public Task<List<KeyValuePair<bool, string>>> CreateListWithTrainingMachines(int? id);
         public Task<Gym> GetGymById(int id);
-        public void AddGym(CreateOrUpdateGymRequest request);
-        public void UpdateGym(int id, CreateOrUpdateGymRequest request);
-        public void DeleteGym(int id);
+        public Task AddGym(CreateOrUpdateGymRequest request);
+        public Task UpdateGym(int id, CreateOrUpdateGymRequest request);
+        public Task DeleteGym(int id);
     }
 }

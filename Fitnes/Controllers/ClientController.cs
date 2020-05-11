@@ -28,9 +28,9 @@ namespace Fitnes.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CreateOrUpdateClientRequest request) {
+        public async Task<ActionResult> Create(CreateOrUpdateClientRequest request) {
             try {
-                _manager.AddClient(request);
+                await _manager.AddClient(request);
                 return RedirectToAction(nameof(ShowClients));
             }
             catch (ArgumentNullException) {
@@ -50,9 +50,9 @@ namespace Fitnes.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Update(int id, CreateOrUpdateClientRequest request) {
+        public async  Task<ActionResult> Update(int id, CreateOrUpdateClientRequest request) {
             try {
-                _manager.UpdateClient(id, request);
+                await _manager.UpdateClient(id, request);
                 return RedirectToAction(nameof(ShowClients));
             }
             catch (ArgumentNullException) {
@@ -61,9 +61,9 @@ namespace Fitnes.Controllers
 
         }
         [HttpGet]
-        public ActionResult DeleteClient(int id) {
+        public async  Task<ActionResult> DeleteClient(int id) {
             try {
-                _manager.DeleteClient(id);
+                await _manager.DeleteClient(id);
                 return RedirectToAction(nameof(ShowClients));
             }
             catch (ArgumentNullException) {

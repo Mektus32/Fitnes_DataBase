@@ -10,8 +10,8 @@ namespace Fitnes.Storage.Manager.Clients {
         public Task<IReadOnlyCollection<ClientWithTrainerAndSubscriptionsName>> GetAll();
         public Task<Client> GetClientById(int id);
         public Task<(List<KeyValuePair<int, string>>, List<KeyValuePair<int, string>>)> CreateListForViewCreateClient();
-        public void AddClient(CreateOrUpdateClientRequest request);
-        public void UpdateClient(int id, CreateOrUpdateClientRequest request);
-        public void DeleteClient(int id);
+        public Task AddClient(CreateOrUpdateClientRequest request);
+        public Task UpdateClient(int id, CreateOrUpdateClientRequest request);
+        public Task DeleteClient(int id);
     }
 }

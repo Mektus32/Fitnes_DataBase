@@ -14,19 +14,22 @@ namespace Fitnes.Storage.Manager.Gyms {
         public GymManager(FitnesDbContext fitnesDbContext) {
             context = fitnesDbContext;
         }
-        public async void AddGym(CreateOrUpdateGymRequest request) {
+        public async Task AddGym(CreateOrUpdateGymRequest request) {
             var gym = new Gym {
-                GymId = context.Gyms.LastOrDefault().GymId++,
-                Name = request.Name
+                Name = request.Name,
+                Address = request.Address
             };
-            foreach (var elem in request.MachinesName) {
-                var GymMachine = new GymTrainingMachine {
-                    GymId = gym.GymId,
-                    TrainingMachineId = context.TrainingMachines.Where(c => c.Name == elem).FirstOrDefault().TrainingMachineId
-                };
-                await context.GymTrainingMachines.AddAsync(GymMachine);
-            }
             await context.Gyms.AddAsync(gym);
+            await context.SaveChangesAsync();
+            if (request.MachinesName != null) {
+                foreach (var elem in request.MachinesName) {
+                    var GymMachine = new GymTrainingMachine {
+                        GymId = gym.GymId,
+                        TrainingMachineId = context.TrainingMachines.Where(c => c.Name == elem).FirstOrDefault().TrainingMachineId
+                    };
+                    await context.GymTrainingMachines.AddAsync(GymMachine);
+                }
+            }
             await context.SaveChangesAsync();
         }
         public async Task<List<KeyValuePair<bool, string>>> CreateListWithTrainingMachines(int? id=null) {
@@ -46,17 +49,17 @@ namespace Fitnes.Storage.Manager.Gyms {
             return list;
         }
 
-        public void DeleteGym(int id) {
-            var GymMachines = context.GymTrainingMachines.Where(c => c.GymId == id).ToList();
+        public async Task DeleteGym(int id) {
+            var GymMachines = await context.GymTrainingMachines.Where(c => c.GymId == id).ToListAsync();
             foreach (var elem in GymMachines) {
                 context.GymTrainingMachines.Remove(elem);
             }
-            var emp = context.Employees.Where(c => c.GymId == id).ToList();
+            var emp = await context.Employees.Where(c => c.GymId == id).ToListAsync();
             foreach (var elem in emp) {
                 elem.GymId = null;
             }
             context.Gyms.Remove(context.Gyms.Find(id));
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
         public async Task<IReadOnlyCollection<GymWithTrainingMachines>> GetAll() {
             var tmp = await context.Gyms.Include(c => c).ToListAsync();
@@ -80,19 +83,25 @@ namespace Fitnes.Storage.Manager.Gyms {
                 throw new ArgumentNullException();
             return entity;
         }
-        public async void UpdateGym(int id, CreateOrUpdateGymRequest request) {
+        public async Task UpdateGym(int id, CreateOrUpdateGymRequest request) {
             var gym = await context.Gyms.FindAsync(id);
-            gym.Name = request.Name;
-            gym.Address = request.Address;
-            this.DeleteGym(id);
-            foreach (var elem in request.MachinesName) {
-                var GymMachine = new GymTrainingMachine {
-                    GymId = gym.GymId,
-                    TrainingMachineId = context.TrainingMachines.Where(c => c.Name == elem).FirstOrDefault().TrainingMachineId
-                };
-                await context.GymTrainingMachines.AddAsync(GymMachine);
+            var GymMachines = await context.GymTrainingMachines.Where(c => c.GymId == id).ToListAsync();
+            foreach (var elem in GymMachines) {
+                context.GymTrainingMachines.Remove(elem);
             }
-            await context.Gyms.AddAsync(gym);
+            var emp = await context.Employees.Where(c => c.GymId == id).ToListAsync();
+            foreach (var elem in emp) {
+                elem.GymId = null;
+            }
+            if (request.MachinesName != null) {
+                foreach (var elem in request.MachinesName) {
+                    var GymMachine = new GymTrainingMachine {
+                        GymId = gym.GymId,
+                        TrainingMachineId = context.TrainingMachines.Where(c => c.Name == elem).FirstOrDefault().TrainingMachineId
+                    };
+                    await context.GymTrainingMachines.AddAsync(GymMachine);
+                }
+            }
             await context.SaveChangesAsync();
         }
     }

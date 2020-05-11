@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitnes.Storage.Migrations
 {
     [DbContext(typeof(FitnesDbContext))]
-    [Migration("20200511135755_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200511200555_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
