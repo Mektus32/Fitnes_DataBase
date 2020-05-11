@@ -1,0 +1,10 @@
+﻿@using Fitnes.Storage.Repository
+@model List<Position>
+@{
+    Layout = "_Layout";
+}
+@foreach (var elem in Model) {
+    <a>@elem.PositionId</a>
+    <a>@elem.Name</a>
+    <br/>
+}

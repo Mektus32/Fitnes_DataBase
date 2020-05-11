@@ -1,0 +1,12 @@
+﻿@using Fitnes.Storage.Manager.Employers
+@model List<EmployeeWithPositionAndGymName>
+@{
+    Layout = "_Layout";
+}
+@foreach (var elem in Model) {
+    <a>@elem.Id</a>
+    <a>@elem.Name</a>
+    <a>@elem.PositionName</a>
+    <a>@elem.Salary</a>
+    <a>@elem.Experience</a>
+} 

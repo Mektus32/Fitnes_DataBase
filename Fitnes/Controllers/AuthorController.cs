@@ -34,7 +34,6 @@ namespace Fitnes.Controllers
         }
         [HttpGet]
         public async Task<ActionResult> UpdateAuthor(int id) {
-            ViewBag.ErrorMesssage = null;
             try {
                 var entity = await _manager.GetAuthorById(id);
                 return View(entity);
@@ -44,7 +43,6 @@ namespace Fitnes.Controllers
         }
         [HttpPost]
         public ActionResult Update(int id, CreateOrUpdateAuthorRequest request) {
-            ViewBag.ErrorMessage = null;
             try {
                 _manager.UpdateAuthor(id, request);
                 return RedirectToAction(nameof(ShowAuthors));
@@ -52,16 +50,6 @@ namespace Fitnes.Controllers
                 return RedirectToAction("ErrorPage", nameof(Main), new {message = "Error: can not update author", call = nameof(Author) });
             }
             
-        }
-        [HttpGet]
-        public ActionResult DeleteAuthor(int id) {
-            ViewBag.ErrorMessage = null;
-            try {
-                _manager.DeleteAuthor(id);
-                return RedirectToAction(nameof(ShowAuthors));
-            } catch (ArgumentNullException) {
-                return RedirectToAction("ErrorPage", nameof(Main),  new {message = "Error: can not delete author", call = nameof(Author) });
-            }
         }
     }
 }

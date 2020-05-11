@@ -5,5 +5,6 @@ using System.Threading.Tasks;
 
 namespace Fitnes.Storage.Manager.Positions {
     public class CreateOrUpdatePositionRequest {
+        public string Name { get; set; }
     }
 }

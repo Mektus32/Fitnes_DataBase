@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitnes.Storage.Migrations
 {
     [DbContext(typeof(FitnesDbContext))]
-    [Migration("20200509164359_Initial")]
-    partial class Initial
+    [Migration("20200511135755_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,8 +103,7 @@ namespace Fitnes.Storage.Migrations
                             ClientId = 3,
                             LastName = "Sharshan",
                             Name = "Mike",
-                            SubscriptionId = 3,
-                            TrainerId = 2
+                            SubscriptionId = 3
                         },
                         new
                         {

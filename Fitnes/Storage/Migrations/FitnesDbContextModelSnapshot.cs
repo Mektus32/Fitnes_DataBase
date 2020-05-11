@@ -101,8 +101,7 @@ namespace Fitnes.Storage.Migrations
                             ClientId = 3,
                             LastName = "Sharshan",
                             Name = "Mike",
-                            SubscriptionId = 3,
-                            TrainerId = 2
+                            SubscriptionId = 3
                         },
                         new
                         {

@@ -1,0 +1,12 @@
+﻿@using Fitnes.Storage.Repository
+@model List<Subscription>
+@{
+    Layout = "_Layout";
+}
+@foreach (var elem in Model) {
+    <a>@elem.SubscriptionId</a>
+    <a>@elem.Name</a>
+    <a>@elem.Price</a>
+    <a>@elem.Time</a>
+    <br/>
+}

@@ -1,10 +1,9 @@
 ﻿@using Fitnes.Storage.Repository
-@model IEnumerable<Author> 
+@model List<Author>
 @{
-    ViewData["Title"] = "ShowAuthors";
+    Layout = "_Layout";
 }
-
 @foreach (var elem in Model) {
-    <p>@elem.Name</p>
+    <a>@elem.Name</a>
 }
-
+<h1></h1>

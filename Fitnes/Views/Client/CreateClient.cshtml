@@ -1,7 +1,43 @@
 ﻿@model (List<KeyValuePair<int, string>>, List<KeyValuePair<int, string>>)
 @{
-    ViewData["Title"] = "CreateClient";
+    Layout = "_Layout";
 }
 
-<h1>@Model.Item1[0].Value</h1>
+@using (Html.BeginForm("Create", "Client", FormMethod.Post)) {
+    <fieldset class="container">
+        <legend>Update data</legend>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" required class="form-control" name="Name" id="name" aria-describedby="nameHelp" value="">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Lastname</label>
+            <input type="text" required class="form-control" name="LastName" id="lastName" value="">
+        </div>
+        <div class="form-group">
+            <label for="selectTrainer">Choose trainer</label>
+            <select class="form-control" name="TrainerId" id="selectTrainer">
+                <option value="0"></option>
+                @foreach (var elem in Model.Item1) {
+                    <option value="@elem.Key">@elem.Value</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="selectSubscription">Choose trainer</label>
+            <select class="form-control" name="SubscriptionId" id="selectSubscription">
+                <option value="0"></option>
+                @foreach (var elem in Model.Item2) {
+                    <option value="@elem.Key">@elem.Value</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">File input</label>
+            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+            <small id="fileHelp" class="form-text text-muted">You can input photo new client</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </fieldset>
+}
 

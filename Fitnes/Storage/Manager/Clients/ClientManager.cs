@@ -7,22 +7,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Fitnes.Manager.Clients {
+namespace Fitnes.Storage.Manager.Clients {
     public class ClientManager : IClientManager {
         private readonly FitnesDbContext context;
         public ClientManager(FitnesDbContext fitnesDbContext) {
             context = fitnesDbContext;
         }
 
-        public async void AddClient(CreateOrUpdateClientRequest request) {
+        public void AddClient(CreateOrUpdateClientRequest request) {
             var client = new Client {
-                ClientId = context.Clients.LastOrDefault().ClientId++,
                 Name = request.Name,
-                TrainerId = request.TrainerId,
-                SubscriptionId = request.SubscriptionId
+                LastName = request.LastName,
+                TrainerId = request.TrainerId != 0 ? request.TrainerId : null,
+                SubscriptionId = request.SubscriptionId != 0 ? request.SubscriptionId : null
             };
-            await context.Clients.AddAsync(client);
-            await context.SaveChangesAsync();
+            context.Clients.Add(client);
+            context.SaveChanges();
         }
 
         public void DeleteClient(int id) {
@@ -33,10 +33,14 @@ namespace Fitnes.Manager.Clients {
         public async Task<IReadOnlyCollection<ClientWithTrainerAndSubscriptionsName>> GetAll() {
             var tmp = await context.Clients.Include(c => c).ToListAsync();
             List<ClientWithTrainerAndSubscriptionsName> listWithNames = new List<ClientWithTrainerAndSubscriptionsName>();
+            
             foreach (var elem in tmp) {
-                listWithNames.Add(new ClientWithTrainerAndSubscriptionsName() { Name = elem.Name, LastName = elem.LastName,
-                    TrainerName = context.Employees.Find(context.Trainers.Find(elem.TrainerId).EmployeeId).Name,
-                    SubscriptionName = context.Subscriptions.Find(elem.SubscriptionId).Name });
+                listWithNames.Add(new ClientWithTrainerAndSubscriptionsName() {
+                    Id = elem.ClientId,
+                    Name = elem.Name,
+                    LastName = elem.LastName,
+                    TrainerName = elem.TrainerId != null ? context.Employees.Find(context.Trainers.Find(elem.TrainerId).EmployeeId).Name : null,
+                    SubscriptionName = elem.SubscriptionId != null ? context.Subscriptions.Find(elem.SubscriptionId).Name : null });
             }
             return listWithNames;
         }
@@ -47,21 +51,20 @@ namespace Fitnes.Manager.Clients {
                 throw new ArgumentNullException();
             return entity;
         }
-        public async void UpdateClient(int id, CreateOrUpdateClientRequest request) {
-            var client = await context.Clients.FindAsync(id);
+        public void UpdateClient(int id, CreateOrUpdateClientRequest request) {
+            var client = context.Clients.Find(id);
             client.Name = request.Name;
             client.LastName = request.LastName;
-            client.TrainerId = request.TrainerId;
-            client.SubscriptionId = request.SubscriptionId;
-            await context.SaveChangesAsync();
+            client.TrainerId = request.TrainerId != 0 ? request.TrainerId : null;
+            client.SubscriptionId = request.SubscriptionId != 0 ? request.SubscriptionId : null;
+            context.SaveChanges();
         }
         public async Task<(List<KeyValuePair<int, string>>, List<KeyValuePair<int, string>>)> CreateListForViewCreateClient() {
             List<KeyValuePair<int, string>> listTrainers = new List<KeyValuePair<int, string>>();
             List<KeyValuePair<int, string>> listSubscriptions = new List<KeyValuePair<int, string>>();
             await context.Trainers.ForEachAsync(elem => listTrainers.Add(new KeyValuePair<int, string>(elem.TrainerId,
              context.Employees.Find(elem.EmployeeId).Name)));
-            await context.Subscriptions.ForEachAsync(elem => listSubscriptions.Add(new KeyValuePair<int, string>(elem.SubscriptionId,
-                context.Subscriptions.Find(elem.SubscriptionId).Name)));
+            await context.Subscriptions.ForEachAsync(elem => listSubscriptions.Add(new KeyValuePair<int, string>(elem.SubscriptionId, elem.Name)));
             return (listTrainers, listSubscriptions);
         }
     }

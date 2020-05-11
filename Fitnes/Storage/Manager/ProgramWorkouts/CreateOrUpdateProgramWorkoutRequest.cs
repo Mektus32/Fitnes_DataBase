@@ -4,7 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Fitnes.Manager.ProgramWorkouts {
+namespace Fitnes.Storage.Manager.ProgramWorkouts {
     public class CreateOrUpdateProgramWorkoutRequest {
+        public string Name { get; set; }
+        public int AuthorId;
+        public double Period { get; set; }
     }
 }

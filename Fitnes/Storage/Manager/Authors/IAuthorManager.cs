@@ -10,6 +10,5 @@ namespace Fitnes.Storage.Manager.Authors {
         public Task<Author> GetAuthorById(int id);
         public void AddAuthor(CreateOrUpdateAuthorRequest request);
         public void UpdateAuthor(int id, CreateOrUpdateAuthorRequest request);
-        public void DeleteAuthor(int id);
     }
 }

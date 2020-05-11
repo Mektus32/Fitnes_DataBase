@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Fitnes.Manager.Employers {
+namespace Fitnes.Storage.Manager.Employers {
     public class CreateOrUpdateEmployeeRequest {
         public string Name { get; set; }
         public int PositionId { get; set; }

@@ -37,7 +37,7 @@ namespace Fitnes.Storage {
                 new Client[] {
                     new Client { ClientId = 1, Name = "Mike", LastName = "Tarasyan", TrainerId = 1, SubscriptionId = 1 },
                     new Client { ClientId = 2, Name = "Ayka", LastName = "Islanova", TrainerId = 2, SubscriptionId = 2 },
-                    new Client { ClientId = 3, Name = "Mike", LastName = "Sharshan", TrainerId = 2, SubscriptionId = 3 },
+                    new Client { ClientId = 3, Name = "Mike", LastName = "Sharshan", TrainerId = null, SubscriptionId = 3 },
                     new Client { ClientId = 4, Name = "Dima", LastName = "Konopkin", TrainerId = 1, SubscriptionId = 1 }
                 });
             modelBuilder.Entity<Gym>().HasData(

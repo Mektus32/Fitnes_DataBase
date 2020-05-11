@@ -1,0 +1,12 @@
+﻿@using Fitnes.Storage.Manager.ProgramWorkouts
+@model List<ProgramWorkoutWithAuthorName>
+@{
+    Layout = "_Layout";
+}
+@foreach (var elem in Model) {
+    <a>@elem.Id</a>
+    <a>@elem.Name</a>
+    <a>@elem.AuthorName</a>
+    <a>@elem.Period</a>
+    <br/>
+} 

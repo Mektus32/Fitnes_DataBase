@@ -1,10 +1,17 @@
-﻿using Fitnes.Storage.Repository;
+﻿using Fitnes.Storage.Manager.Gyms;
+using Fitnes.Storage.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Fitnes.Manager.Gyms {
-    interface IGymManager {
+namespace Fitnes.Storage.Manager.Gyms {
+    public interface IGymManager {
+        public Task<IReadOnlyCollection<GymWithTrainingMachines>> GetAll();
+        public Task<List<KeyValuePair<bool, string>>> CreateListWithTrainingMachines(int? id);
+        public Task<Gym> GetGymById(int id);
+        public void AddGym(CreateOrUpdateGymRequest request);
+        public void UpdateGym(int id, CreateOrUpdateGymRequest request);
+        public void DeleteGym(int id);
     }
 }

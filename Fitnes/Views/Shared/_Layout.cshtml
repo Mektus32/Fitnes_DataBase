@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!--<link href="~/css/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/united/bootstrap.min.css" rel="stylesheet" integrity="sha384-bzjLLgZOhgXbSvSc5A9LWWo/mSIYf7U7nFbmYIB2Lgmuiw3vKGJuu+abKoaTx4W6" crossorigin="anonymous">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/Main/MainPage">Fitnes Center</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Client/ShowClients">Clients</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Gym/ShowGyms">Gyms</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Trainer/ShowTrainers">Trainers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Subscription/ShowSubscriptions">Subscriptions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Employee/ShowEmployees">Employees</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ProgramWorkout/ShowProgramWorkouts">Programs Workout</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+    <script src="~/js/bootstrap.min.js"></script>
+</body>
+</html>

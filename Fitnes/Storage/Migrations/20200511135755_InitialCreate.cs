@@ -2,7 +2,7 @@
 
 namespace Fitnes.Storage.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -254,6 +254,11 @@ namespace Fitnes.Storage.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Client",
+                columns: new[] { "ClientId", "LastName", "Name", "SubscriptionId", "TrainerId" },
+                values: new object[] { 3, "Sharshan", "Mike", 3, null });
+
+            migrationBuilder.InsertData(
                 table: "Employee",
                 columns: new[] { "EmployeeId", "Experience", "GymId", "Name", "PositionId", "Salary" },
                 values: new object[,]
@@ -302,13 +307,17 @@ namespace Fitnes.Storage.Migrations
             migrationBuilder.InsertData(
                 table: "Client",
                 columns: new[] { "ClientId", "LastName", "Name", "SubscriptionId", "TrainerId" },
-                values: new object[,]
-                {
-                    { 2, "Islanova", "Ayka", 2, 2 },
-                    { 3, "Sharshan", "Mike", 3, 2 },
-                    { 1, "Tarasyan", "Mike", 1, 1 },
-                    { 4, "Konopkin", "Dima", 1, 1 }
-                });
+                values: new object[] { 2, "Islanova", "Ayka", 2, 2 });
+
+            migrationBuilder.InsertData(
+                table: "Client",
+                columns: new[] { "ClientId", "LastName", "Name", "SubscriptionId", "TrainerId" },
+                values: new object[] { 1, "Tarasyan", "Mike", 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Client",
+                columns: new[] { "ClientId", "LastName", "Name", "SubscriptionId", "TrainerId" },
+                values: new object[] { 4, "Konopkin", "Dima", 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Client_SubscriptionId",

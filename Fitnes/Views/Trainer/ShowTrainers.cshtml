@@ -1,0 +1,12 @@
+﻿@using Fitnes.Storage.Manager.Trainers
+@model List<TrainerWithPWAndEmployeeName>
+@{
+    Layout = "_Layout";
+}
+
+@foreach (var elem in Model) {
+    <a>@elem.Id</a>
+    <a>@elem.Name</a>
+    <a>@elem.ProgramWorkoutName</a>
+    <br />
+}

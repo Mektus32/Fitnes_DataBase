@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Fitnes.Storage.Manager.Clients;
 using Fitnes.Storage.Repository;
 
-namespace Fitnes.Manager.Clients {
+namespace Fitnes.Storage.Manager.Clients {
     public interface IClientManager {
         public Task<IReadOnlyCollection<ClientWithTrainerAndSubscriptionsName>> GetAll();
         public Task<Client> GetClientById(int id);

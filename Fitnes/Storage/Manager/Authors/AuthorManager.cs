@@ -21,11 +21,6 @@ namespace Fitnes.Storage.Manager.Authors {
             await context.SaveChangesAsync();
         }
 
-        public void DeleteAuthor(int id) {
-            context.Authors.Remove(context.Authors.Find(id));//TODO check exception
-            context.SaveChanges();
-        }
-
         public async Task<IReadOnlyCollection<Author>> GetAll() {
             return await context.Authors.Include(c => c).ToListAsync();
         }

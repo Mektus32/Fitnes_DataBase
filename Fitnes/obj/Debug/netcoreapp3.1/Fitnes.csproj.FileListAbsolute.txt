@@ -269,6 +269,15 @@ C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Author\ShowAuthors.cshtml.g.cs
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Author\UpdateAuthor.cshtml.g.cs
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Main\ErrorPage.cshtml.g.cs
-C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Client\CreateClient.cshtml.g.cs
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Client\UpdateClient.cshtml.g.cs
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Client\ShowClients.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Gym\ShowGyms.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Trainer\ShowTrainers.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Position\ShowPositions.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\ProgramWorkout\ShowProgramWorkouts.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Subscription\ShowSubscriptions.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Employee\ShowEmployees.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Client\CreateClient.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Gym\CreateGym.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Gym\UpdateGym.cshtml.g.cs
