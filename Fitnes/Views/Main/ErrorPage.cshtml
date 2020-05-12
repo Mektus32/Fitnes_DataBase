@@ -1,0 +1,14 @@
+﻿@model List<string>
+@{
+    Layout = "_Layout";
+}
+
+<div class="alert alert-dismissible alert-warning">
+    <h4 class="alert-heading">Error!</h4>
+    <p class="mb-0">@Model[0]</p>
+</div>
+@using (Html.BeginForm(Model[2], Model[1], FormMethod.Get)) {
+    <div>
+        <input type="submit" class="btn btn-success" value="@Model[3]" />
+    </div>
+}

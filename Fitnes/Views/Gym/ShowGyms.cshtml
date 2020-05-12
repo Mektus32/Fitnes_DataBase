@@ -1,0 +1,53 @@
+﻿@using Fitnes.Storage.Manager.Gyms
+@model List<GymWithTrainingMachines>
+@{
+    Layout = "_Layout";
+}
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">GymId</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Training machines</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var elem in Model) {
+                    <tr class="table-success">
+                        <td>@elem.Id</td>
+                        <td>@elem.Name</td>
+                        <td>@elem.Address</td>
+                        <td>@elem.ToString()</td>
+                        <td>
+                            @using (Html.BeginForm("UpdateGym", "Gym", FormMethod.Get)) {
+                                <div>
+                                    <input type="hidden" name="id" value="@elem.Id" />
+                                    <input type="submit" class="btn btn-outline-success" value="Update" />
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteGym", "Gym", FormMethod.Get)) {
+                                <div>
+                                    <input type="hidden" name="id" value="@elem.Id" />
+                                    <input type="submit" class="btn btn-outline-success" value="Delete" />
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @using (Html.BeginForm("CreateGym", "Gym", FormMethod.Get)) {
+            <div>
+                <input type="submit" class="btn btn-success" value="Add gym" />
+            </div>
+        }
+        @using (Html.BeginForm("ShowTrainingMachines", "TrainingMachine", FormMethod.Get)) {
+            <div>
+                <input type="submit" class="btn btn-success" value="Show training machine" />
+            </div>
+        }
+    </div>

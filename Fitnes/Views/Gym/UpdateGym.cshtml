@@ -1,0 +1,37 @@
+﻿@using Fitnes.Storage.Repository 
+@model (Gym, List<KeyValuePair<int, KeyValuePair<bool, string>>>)
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm("Update", "Gym", FormMethod.Post)) {
+    <fieldset class="container">
+        <input type="hidden" name="id" value="@Model.Item1.GymId" />
+        <legend>Update data</legend>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" required class="form-control" name="Name" id="name" aria-describedby="nameHelp" value="@Model.Item1.Name">
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" required class="form-control" name="Address" id="address" value="@Model.Item1.Address">
+        </div>
+        <div class="form-group">
+            @foreach (var elem in Model.Item2) {
+                if (elem.Value.Key == true) {
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="@elem.Key" value="@elem.Key" name="MachinesIndex[]" checked>
+                        <label class="custom-control-label" for="@elem.Key">@elem.Value.Value</label>
+                    </div>
+                }
+                else {
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="@elem.Key" value="@elem.Key" name="MachinesIndex[]">
+                        <label class="custom-control-label" for="@elem.Key">@elem.Value.Value</label>
+                    </div>
+                }
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </fieldset>
+}

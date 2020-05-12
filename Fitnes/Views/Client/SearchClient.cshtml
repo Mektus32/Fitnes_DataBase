@@ -1,0 +1,45 @@
+﻿@using Fitnes.Storage.Manager.Clients
+@model List<ClientWithTrainerAndSubscriptionsName>
+@{
+    Layout = "_Layout";
+}
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ClientId</th>
+                <th scope="col">Name</th>
+                <th scope="col">LastName</th>
+                <th scope="col">Trainer</th>
+                <th scope="col">Subscription</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var elem in Model) {
+                <tr class="table-success">
+                    <td>@elem.Id</td>
+                    <td>@elem.Name</td>
+                    <td>@elem.LastName</td>
+                    <td>@elem.TrainerName</td>
+                    <td>@elem.SubscriptionName</td>
+                    <td>
+                        @using (Html.BeginForm("UpdateClient", "Client", FormMethod.Get)) {
+                            <div>
+                                <input type="hidden" name="id" value="@elem.Id" />
+                                <input type="submit" class="btn btn-outline-success" value="Update" />
+                            </div>
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("DeleteClient", "Client", FormMethod.Get)) {
+                            <div>
+                                <input type="hidden" name="id" value="@elem.Id" />
+                                <input type="submit" class="btn btn-outline-success" value="Delete" />
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

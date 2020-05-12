@@ -1,0 +1,19 @@
+﻿@using Fitnes.Storage.Repository;
+@model Author;
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm("Update", "Author", FormMethod.Post)) {
+    <fieldset class="container">
+        <input type="hidden" name="id" value="@Model.AuthorId" />
+        <legend>Update data</legend>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" required class="form-control" name="Name" id="name" aria-describedby="nameHelp" value="@Model.Name">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </fieldset>
+}
+
+

@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 namespace Fitnes.Storage.Repository {
     [Table("Author")]
     public class Author {
-        private readonly FitnesDbContext fitnesDbContext;
-        public Author(FitnesDbContext fitnesDbContext) {
-            this.fitnesDbContext = fitnesDbContext;
-        }
         [Key]
         [Required]
-        public Guid AuthorId { get; set; }
+        public int AuthorId { get; set; }
 
         [Required]
         [MaxLength(50)]

@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm("Create", "TrainingMachine", FormMethod.Post)) {
+    <fieldset class="container">
+        <legend>Create data</legend>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" required class="form-control" name="Name" id="name" aria-describedby="nameHelp" value="">
+        </div>
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="isForHand" value="true" name="IsForHand" checked="">
+                <label class="custom-control-label" for="isForHand">Is for hand</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="isForLeg" value="true" name="IsForLeg" checked="">
+                <label class="custom-control-label" for="isForLeg">Is for leg</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="isForBack" value="true" name="IsForBack" checked="">
+                <label class="custom-control-label" for="isForBack">Is for back</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </fieldset>
+}
+
+

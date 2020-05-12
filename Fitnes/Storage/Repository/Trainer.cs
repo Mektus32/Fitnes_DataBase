@@ -8,19 +8,15 @@ using System.Threading.Tasks;
 namespace Fitnes.Storage.Repository {
     [Table("Trainer")]
     public class Trainer {
-        private readonly FitnesDbContext fitnesDbContext;
-        public Trainer(FitnesDbContext fitnesDbContext) {
-            this.fitnesDbContext = fitnesDbContext;
-        }
         [Required]
         [Key]
-        public Guid TrainerId { get; set; }
+        public int TrainerId { get; set; }
 
-        public Guid? ProgramWorkoutId { get; set; }
+        public int? ProgramWorkoutId { get; set; }
         [ForeignKey(nameof(ProgramWorkoutId))]
         public ProgramWorkout ProgramWorkout {get; set; }
 
-        public Guid? EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         [ForeignKey(nameof(EmployeeId))]
         public Employee Employee { get; set; }
     }

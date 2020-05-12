@@ -1,0 +1,57 @@
+﻿@using Fitnes.Storage.Manager.Employers
+@model List<EmployeeWithPositionAndGymName>
+@{
+    Layout = "_Layout";
+}
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">EmployeeId</th>
+                    <th scope="col">Position name</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Experience</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Gym</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var elem in Model) {
+                    <tr class="table-success">
+                        <td>@elem.Id</td>
+                        <td>@elem.PositionName</td>
+                        <td>@elem.Name</td>
+                        <td>@elem.Experience</td>
+                        <td>@elem.Salary</td>
+                        <td>@elem.GymName</td>
+                        <td>
+                            @using (Html.BeginForm("UpdateEmployee", "Employee", FormMethod.Get)) {
+                                <div>
+                                    <input type="hidden" name="id" value="@elem.Id" />
+                                    <input type="submit" class="btn btn-outline-success" value="Update" />
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteEmployee", "Employee", FormMethod.Get)) {
+                                <div>
+                                    <input type="hidden" name="id" value="@elem.Id" />
+                                    <input type="submit" class="btn btn-outline-success" value="Delete" />
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @using (Html.BeginForm("CreateEmployee", "Employee", FormMethod.Get)) {
+            <div>
+                <input type="submit" class="btn btn-success" value="Add employee" />
+            </div>
+        }
+        @using (Html.BeginForm("ShowPositions", "Position", FormMethod.Get)) {
+            <div>
+                <input type="submit" class="btn btn-success" value="Show positions" />
+            </div>
+        }
+    </div>

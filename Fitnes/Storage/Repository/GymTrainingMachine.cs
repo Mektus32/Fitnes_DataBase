@@ -10,14 +10,10 @@ namespace Fitnes.Storage.Repository {
     [Table("GymTrainingMachine")]
     
     public class GymTrainingMachine {
-        private readonly FitnesDbContext fitnesDbContext;
-        public GymTrainingMachine(FitnesDbContext fitnesDbContext) {
-            this.fitnesDbContext = fitnesDbContext;
-        }
-        public Guid? GymId { get; set; }
+        public int? GymId { get; set; }
         public Gym Gym { get; set; }
 
-        public Guid? TrainingMachineId { get; set; }
+        public int? TrainingMachineId { get; set; }
         public TrainingMachine TrainingMachine { get; set; }
     }
 }

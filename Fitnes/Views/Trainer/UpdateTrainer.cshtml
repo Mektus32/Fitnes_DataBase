@@ -1,0 +1,42 @@
+﻿@using Fitnes.Storage.Repository
+@model (Trainer, (List<KeyValuePair<int, string>>, List<KeyValuePair<int, string>>))
+@{
+    Layout = "_Layout";
+}
+@using (Html.BeginForm("Update", "Trainer", FormMethod.Post)) {
+    <fieldset class="container">
+        <legend>Update data</legend>
+        <div class="form-group">
+            <input type="hidden" required class="form-control" name="id" aria-describedby="idHelp" value="@Model.Item1.TrainerId">
+        </div>
+        <div class="form-group">
+            <label for="selectProgramWorkout">Choose program workout</label>
+            <select class="form-control" name="ProgramWorkoutId" id="selectProgramWorkout">
+                <option value="0"></option>
+                @foreach (var elem in Model.Item2.Item1) {
+                    if (elem.Key != Model.Item1.ProgramWorkoutId) {
+                        <option value="@elem.Key">@elem.Value</option>
+                    }
+                    else {
+                        <option value="@elem.Key" selected>@elem.Value</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="selectEmployee">Choose employee</label>
+            <select class="form-control" name="EmployeeId" id="selectEmployee">
+                @foreach (var elem in Model.Item2.Item2) {
+                    if (elem.Key != Model.Item1.EmployeeId) {
+                        <option value="@elem.Key">@elem.Value</option>
+                        
+                    }
+                    else {
+                        <option value="@elem.Key" selected>@elem.Value</option>
+                    }
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </fieldset>
+}

@@ -1,0 +1,39 @@
+﻿@model (List<KeyValuePair<int, string>>, List<KeyValuePair<int, string>>)
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm("Create", "Employee", FormMethod.Post)) {
+    <fieldset class="container">
+        <legend>Create data</legend>
+        <div class="form-group">
+            <label for="selectPosition">Choose position</label>
+            <select class="form-control" name="PositionId" id="selectPosition">
+                @foreach (var elem in Model.Item1) {
+                    <option value="@elem.Key">@elem.Value</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" required class="form-control" name="Name" id="name" aria-describedby="nameHelp" value="">
+        </div>
+        <div class="form-group">
+            <label for="experience">Experience</label>
+            <input type="number" step="0.1" required class="form-control" name="Experience" id="experience" value="">
+        </div>
+        <div class="form-group">
+            <label for="salary">Salary</label>
+            <input type="number" required class="form-control" name="Salary" id="salary" value="">
+        </div>
+        <div class="form-group">
+            <label for="selectGym">Choose gym</label>
+            <select class="form-control" name="GymId" id="selectGym">
+                @foreach (var elem in Model.Item2) {
+                    <option value="@elem.Key">@elem.Value</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </fieldset>
+}

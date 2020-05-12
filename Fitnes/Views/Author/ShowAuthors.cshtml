@@ -1,0 +1,34 @@
+﻿@using Fitnes.Storage.Repository
+@model List<Author>
+@{
+    Layout = "_Layout";
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">AuthorId</th>
+            <th scope="col">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var elem in Model) {
+            <tr class="table-success">
+                <td>@elem.AuthorId</td>
+                <td>@elem.Name</td>
+                <td>
+                    @using (Html.BeginForm("UpdateAuthor", "Author", FormMethod.Get)) {
+                        <div>
+                            <input type="hidden" name="id" value="@elem.AuthorId" />
+                            <input type="submit" class="btn btn-outline-success" value="Update" />
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@using (Html.BeginForm("CreateAuthor", "Author", FormMethod.Get)) {
+    <div>
+        <input type="submit" class="btn btn-success" value="Add author" />
+    </div>
+}
