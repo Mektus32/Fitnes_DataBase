@@ -8,6 +8,6 @@ namespace Fitnes.Storage.Manager.Gyms {
     public class CreateOrUpdateGymRequest {
         public string Name { get; set; }
         public string Address { get; set; }
-        public List<string> MachinesName { get; set; }
+        public List<int> MachinesIndex { get; set; }
     }
 }

@@ -1,11 +1,11 @@
-﻿@model List<KeyValuePair<bool, string>>
+﻿@model List<KeyValuePair<int, KeyValuePair<bool, string>>>
 @{
     Layout = "_Layout";
 }
 
 @using (Html.BeginForm("Create", "Gym", FormMethod.Post)) {
     <fieldset class="container">
-        <legend>Update data</legend>
+        <legend>Create data</legend>
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" required class="form-control" name="Name" id="name" aria-describedby="nameHelp" value="">
@@ -17,8 +17,8 @@
         <div class="form-group">
             @foreach (var elem in Model) {
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="@elem.Value" value="@elem.Value" name="MachinesName[]" checked="">
-                    <label class="custom-control-label" for="@elem.Value">@elem.Value</label>
+                    <input type="checkbox" class="custom-control-input" id="@elem.Key" value="@elem.Key" name="MachinesIndex[]" checked="">
+                    <label class="custom-control-label" for="@elem.Key">@elem.Value.Value</label>
                 </div>
             }
         </div>

@@ -5,7 +5,7 @@
 
 @using (Html.BeginForm("Create", "Client", FormMethod.Post)) {
     <fieldset class="container">
-        <legend>Update data</legend>
+        <legend>Create data</legend>
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" required class="form-control" name="Name" id="name" aria-describedby="nameHelp" value="">
@@ -31,11 +31,6 @@
                     <option value="@elem.Key">@elem.Value</option>
                 }
             </select>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-            <small id="fileHelp" class="form-text text-muted">You can input photo new client</small>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </fieldset>

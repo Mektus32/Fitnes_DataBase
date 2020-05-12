@@ -70,5 +70,15 @@ namespace Fitnes.Controllers
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not delete client", call = nameof(Client) });
             }
         }
+        public ActionResult SearchClient(string text, int term) {
+            try {
+                var list = _manager.SearchClient(text, term);
+                return View(list);
+            }
+            catch (ArgumentNullException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Client) });
+            }
+
+        }
     }
 }

@@ -21,29 +21,29 @@ namespace Fitnes.Storage.Manager.Gyms {
             };
             await context.Gyms.AddAsync(gym);
             await context.SaveChangesAsync();
-            if (request.MachinesName != null) {
-                foreach (var elem in request.MachinesName) {
+            if (request.MachinesIndex != null) {
+                foreach (var elem in request.MachinesIndex) {
                     var GymMachine = new GymTrainingMachine {
                         GymId = gym.GymId,
-                        TrainingMachineId = context.TrainingMachines.Where(c => c.Name == elem).FirstOrDefault().TrainingMachineId
+                        TrainingMachineId = elem
                     };
                     await context.GymTrainingMachines.AddAsync(GymMachine);
                 }
             }
             await context.SaveChangesAsync();
         }
-        public async Task<List<KeyValuePair<bool, string>>> CreateListWithTrainingMachines(int? id=null) {
-            var list = new List<KeyValuePair<bool, string>>();
+        public async Task<List<KeyValuePair<int, KeyValuePair<bool, string>>>> CreateListWithTrainingMachines(int? id=null) {
+            var list = new List<KeyValuePair<int, KeyValuePair<bool, string>>>();
             if (id != null) {
                 var tmp = await context.GymTrainingMachines.Where(c => c.GymId == id).ToListAsync();
                 var Names = new List<string>();
                 tmp.ForEach(elem => Names.Add(context.TrainingMachines.Find(elem.TrainingMachineId).Name));
                 foreach (var elem in context.TrainingMachines) {
-                    list.Add(new KeyValuePair<bool, string>(Names.Contains(elem.Name), elem.Name));
+                    list.Add(new KeyValuePair<int, KeyValuePair<bool, string>>(elem.TrainingMachineId ,new KeyValuePair<bool, string>(Names.Contains(elem.Name), elem.Name)));
                 }
             } else {
                 foreach (var elem in context.TrainingMachines) {
-                    list.Add(new KeyValuePair<bool, string>(false, elem.Name));
+                    list.Add(new KeyValuePair<int, KeyValuePair<bool, string>>(elem.TrainingMachineId, new KeyValuePair<bool, string>(false, elem.Name)));
                 }
             }
             return list;
@@ -89,15 +89,11 @@ namespace Fitnes.Storage.Manager.Gyms {
             foreach (var elem in GymMachines) {
                 context.GymTrainingMachines.Remove(elem);
             }
-            var emp = await context.Employees.Where(c => c.GymId == id).ToListAsync();
-            foreach (var elem in emp) {
-                elem.GymId = null;
-            }
-            if (request.MachinesName != null) {
-                foreach (var elem in request.MachinesName) {
+            if (request.MachinesIndex != null) {
+                foreach (var elem in request.MachinesIndex) {
                     var GymMachine = new GymTrainingMachine {
                         GymId = gym.GymId,
-                        TrainingMachineId = context.TrainingMachines.Where(c => c.Name == elem).FirstOrDefault().TrainingMachineId
+                        TrainingMachineId = elem
                     };
                     await context.GymTrainingMachines.AddAsync(GymMachine);
                 }

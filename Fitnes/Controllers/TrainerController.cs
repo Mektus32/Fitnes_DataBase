@@ -6,6 +6,7 @@ using Fitnes.Storage.Manager.Trainers;
 using Fitnes.Storage;
 using Fitnes.Storage.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fitnes.Controllers
 {
@@ -36,6 +37,9 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not add new trainer", call = nameof(Trainer) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: this employee alredy exists", call = nameof(Trainer) });
             }
         }
         [HttpGet]

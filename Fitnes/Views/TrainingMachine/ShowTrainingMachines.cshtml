@@ -3,64 +3,63 @@
 @{
     Layout = "_Layout";
 }
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Image</th>
-            <th scope="col">TrainingMachineId</th>
-            <th scope="col">Name</th>
-            <th scope="col">Is for hand</th>
-            <th scope="col">Is for leg</th>
-            <th scope="col">Is for back</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var elem in Model) {
-        <tr class="table-success">
-            <td><img style="height: 50px; width: 50px; display: block;" src="~/img/MainBG.jpg" alt="@elem.Name photo"></td>
-            <td>@elem.TrainingMachineId</td>
-            <td>@elem.Name</td>
-            @if (elem.IsForHand == true) {
-                <td>Yes</td>
-            }
-            else {
-                <td>No</td>
-            }
-            @if (elem.IsForLeg == true) {
-                <td>Yes</td>
-            }
-            else {
-                <td>No</td>
-            }
-            @if (elem.IsForBack == true) {
-                <td>Yes</td>
-            }
-            else {
-                <td>No</td>
-            }
-            <td>
-                @using (Html.BeginForm("UpdateTrainingMachine", "TrainingMachine", FormMethod.Get)) {
-                    <div>
-                        <input type="hidden" name="id" value="@elem.TrainingMachineId" />
-                        <input type="submit" class="btn btn-outline-success" value="Update" />
-                    </div>
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">TrainingMachineId</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Is for hand</th>
+                    <th scope="col">Is for leg</th>
+                    <th scope="col">Is for back</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var elem in Model) {
+                    <tr class="table-success">
+                        <td>@elem.TrainingMachineId</td>
+                        <td>@elem.Name</td>
+                        @if (elem.IsForHand == true) {
+                            <td>Yes</td>
+                        }
+                        else {
+                            <td>No</td>
+                        }
+                        @if (elem.IsForLeg == true) {
+                            <td>Yes</td>
+                        }
+                        else {
+                            <td>No</td>
+                        }
+                        @if (elem.IsForBack == true) {
+                            <td>Yes</td>
+                        }
+                        else {
+                            <td>No</td>
+                        }
+                        <td>
+                            @using (Html.BeginForm("UpdateTrainingMachine", "TrainingMachine", FormMethod.Get)) {
+                                <div>
+                                    <input type="hidden" name="id" value="@elem.TrainingMachineId" />
+                                    <input type="submit" class="btn btn-outline-success" value="Update" />
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteTrainingMachine", "TrainingMachine", FormMethod.Get)) {
+                                <div>
+                                    <input type="hidden" name="id" value="@elem.TrainingMachineId" />
+                                    <input type="submit" class="btn btn-outline-success" value="Delete" />
+                                </div>
+                            }
+                        </td>
+                    </tr>
                 }
-            </td>
-            <td>
-                @using (Html.BeginForm("DeleteTrainingMachine", "TrainingMachine", FormMethod.Get)) {
-                    <div>
-                        <input type="hidden" name="id" value="@elem.TrainingMachineId" />
-                        <input type="submit" class="btn btn-outline-success" value="Delete" />
-                    </div>
-                }
-            </td>
-        </tr>
+            </tbody>
+        </table>
+        @using (Html.BeginForm("CreateTrainingMachine", "TrainingMachine", FormMethod.Get)) {
+            <div>
+                <input type="submit" class="btn btn-success" value="Add training machine" />
+            </div>
         }
-    </tbody>
-</table>
-@using (Html.BeginForm("CreateTrainingMachine", "TrainingMachine", FormMethod.Get)) {
-    <div>
-        <input type="submit" class="btn btn-success" value="Add training machine" />
     </div>
-}
-

@@ -1,6 +1,7 @@
 ﻿using Fitnes.Storage;
 using Fitnes.Storage.Manager.Clients;
 using Fitnes.Storage.Repository;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,24 @@ namespace Fitnes.Storage.Manager.Clients {
              context.Employees.Find(elem.EmployeeId).Name)));
             await context.Subscriptions.ForEachAsync(elem => listSubscriptions.Add(new KeyValuePair<int, string>(elem.SubscriptionId, elem.Name)));
             return (listTrainers, listSubscriptions);
+        }
+        public List<ClientWithTrainerAndSubscriptionsName> SearchClient(string text, int term) {
+            var list = new List<ClientWithTrainerAndSubscriptionsName>();
+            foreach (var elem in context.Clients.ToList()) {
+                list.Add(new ClientWithTrainerAndSubscriptionsName() {
+                    Id = elem.ClientId,
+                    Name = elem.Name,
+                    LastName = elem.LastName,
+                    TrainerName = elem.TrainerId != null ? context.Employees.Find(context.Trainers.Find(elem.TrainerId).EmployeeId).Name : null,
+                    SubscriptionName = elem.SubscriptionId != null ? context.Subscriptions.Find(elem.SubscriptionId).Name : null
+                });
+            }
+            switch (term) {
+                case 1: return list.Where(c => c.LastName.IndexOf(text) >= 0).ToList();
+                case 2: return list.Where(c => c.TrainerName != null && c.TrainerName.IndexOf(text) >= 0).ToList();
+                case 3: return list.Where(c => c.SubscriptionName != null && c.SubscriptionName.IndexOf(text) >= 0).ToList();
+                default: throw new ArgumentNullException();
+            }
         }
     }
 }

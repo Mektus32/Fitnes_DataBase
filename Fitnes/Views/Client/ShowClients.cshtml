@@ -3,48 +3,65 @@
 @{
     Layout = "_Layout";
 }
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Image</th>
-            <th scope="col">ClientId</th>
-            <th scope="col">Name</th>
-            <th scope="col">LastName</th>
-            <th scope="col">Trainer</th>
-            <th scope="col">Subscription</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var elem in Model) {
-            <tr class="table-success">
-                <td><img style="height: 50px; width: 50px; display: block;" src="~/img/MainBG.jpg" alt="@elem.Name photo"></td>
-                <td>@elem.Id</td>
-                <td>@elem.Name</td>
-                <td>@elem.LastName</td>
-                <td>@elem.TrainerName</td>
-                <td>@elem.SubscriptionName</td>
-                <td>
-                    @using (Html.BeginForm("UpdateClient", "Client", FormMethod.Get)) {
-                        <div>
-                            <input type="hidden" name="id" value="@elem.Id" />
-                            <input type="submit" class="btn btn-outline-success" value="Update" />
-                        </div>
-                    }
-                </td>
-                <td>
-                    @using (Html.BeginForm("DeleteClient", "Client", FormMethod.Get)) {
-                        <div>
-                            <input type="hidden" name="id" value="@elem.Id" />
-                            <input type="submit" class="btn btn-outline-success" value="Delete" />
-                        </div>
-                    }
-                </td>
-            </tr>
+    <div class="container">
+        @using (Html.BeginForm("SearchClient", "Client", FormMethod.Post)) {
+        <div class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" required type="text" name="text"  placeholder="Search" value="">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary">
+                    <input type="radio" name="term" id="option1" value="1" autocomplete="off"> Last name
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="term" id="option2" value="2" autocomplete="off"> Trainer
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="term" id="option3" value="3" autocomplete="off"> Sub
+                </label>
+            </div>
+        </div>
         }
-    </tbody>
-</table>
-@using (Html.BeginForm("CreateClient", "Client", FormMethod.Get)) {
-    <div>
-        <input type="submit" class="btn btn-success" value="Add client" />
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ClientId</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">Trainer</th>
+                    <th scope="col">Subscription</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var elem in Model) {
+                    <tr class="table-success">
+                        <td>@elem.Id</td>
+                        <td>@elem.Name</td>
+                        <td>@elem.LastName</td>
+                        <td>@elem.TrainerName</td>
+                        <td>@elem.SubscriptionName</td>
+                        <td>
+                            @using (Html.BeginForm("UpdateClient", "Client", FormMethod.Get)) {
+                                <div>
+                                    <input type="hidden" name="id" value="@elem.Id" />
+                                    <input type="submit" class="btn btn-outline-success" value="Update" />
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteClient", "Client", FormMethod.Get)) {
+                                <div>
+                                    <input type="hidden" name="id" value="@elem.Id" />
+                                    <input type="submit" class="btn btn-outline-success" value="Delete" />
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @using (Html.BeginForm("CreateClient", "Client", FormMethod.Get)) {
+            <div>
+                <input type="submit" class="btn btn-success" value="Add client" />
+            </div>
+        }
     </div>
-}

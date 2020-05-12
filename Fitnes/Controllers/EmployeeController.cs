@@ -59,7 +59,7 @@ namespace Fitnes.Controllers
 
         }
         [HttpGet]
-        public async Task<ActionResult> DeleteCEmployee(int id) {
+        public async Task<ActionResult> DeleteEmployee(int id) {
             try {
                 await _manager.DeleteEmployee(id);
                 return RedirectToAction(nameof(ShowEmployees));

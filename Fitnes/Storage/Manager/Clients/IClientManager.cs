@@ -13,5 +13,6 @@ namespace Fitnes.Storage.Manager.Clients {
         public Task AddClient(CreateOrUpdateClientRequest request);
         public Task UpdateClient(int id, CreateOrUpdateClientRequest request);
         public Task DeleteClient(int id);
+        public List<ClientWithTrainerAndSubscriptionsName> SearchClient(string text, int term);
     }
 }

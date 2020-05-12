@@ -295,3 +295,4 @@ C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\TrainingMachine\ShowTrainingMachines.cshtml.g.cs
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\TrainingMachine\CreateTrainingMachine.cshtml.g.cs
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\TrainingMachine\UpdateTrainingMachine.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Client\SearchClient.cshtml.g.cs

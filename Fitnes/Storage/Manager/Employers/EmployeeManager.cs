@@ -29,7 +29,7 @@ namespace Fitnes.Storage.Manager.Employers {
         public async Task DeleteEmployee(int id) {
             var tr = await context.Trainers.Where(c => c.EmployeeId == id).ToListAsync();
             var man = new TrainerManager(context);
-            if (tr != null)
+            if (tr.Count != 0)
                 await man.DeleteTrainer(tr[0].TrainerId);
             context.Employees.Remove(context.Employees.Find(id));
             await context.SaveChangesAsync();
@@ -58,7 +58,7 @@ namespace Fitnes.Storage.Manager.Employers {
         public async Task UpdateEmployee(int id, CreateOrUpdateEmployeeRequest request) {
             if (request.PositionId != 2) {
                 var tr = await context.Trainers.Where(c => c.EmployeeId == id).ToListAsync();
-                if (tr != null) {
+                if (tr.Count != 0) {
                     var man = new TrainerManager(context);
                     await man.DeleteTrainer(tr[0].TrainerId);
                 }

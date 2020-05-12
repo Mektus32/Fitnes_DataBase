@@ -1,5 +1,5 @@
 ﻿@using Fitnes.Storage.Repository 
-@model (Gym, List<KeyValuePair<bool, string>>)
+@model (Gym, List<KeyValuePair<int, KeyValuePair<bool, string>>>)
 @{
     Layout = "_Layout";
 }
@@ -18,16 +18,16 @@
         </div>
         <div class="form-group">
             @foreach (var elem in Model.Item2) {
-                if (elem.Key == true) {
+                if (elem.Value.Key == true) {
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="@elem.Value" value="@elem.Value" name="MachinesName[]" checked>
-                        <label class="custom-control-label" for="@elem.Value">@elem.Value</label>
+                        <input type="checkbox" class="custom-control-input" id="@elem.Key" value="@elem.Key" name="MachinesIndex[]" checked>
+                        <label class="custom-control-label" for="@elem.Key">@elem.Value.Value</label>
                     </div>
                 }
                 else {
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="@elem.Value" value="@elem.Value" name="MachinesName[]">
-                        <label class="custom-control-label" for="@elem.Value">@elem.Value</label>
+                        <input type="checkbox" class="custom-control-input" id="@elem.Key" value="@elem.Key" name="MachinesIndex[]">
+                        <label class="custom-control-label" for="@elem.Key">@elem.Value.Value</label>
                     </div>
                 }
             }
