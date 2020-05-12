@@ -9,6 +9,5 @@ namespace Fitnes.Storage.Manager.TrainingMachines {
         public bool IsForHand { get; set; }
         public bool IsForLeg { get; set; }
         public bool IsForBack { get; set; }
-        public List<string> GymsName { get; set; }
     }
 }

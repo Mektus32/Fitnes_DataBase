@@ -14,9 +14,8 @@ namespace Fitnes.Storage.Manager.ProgramWorkouts {
             context = fitnesDbContext;
         }
 
-        public async void AddProgramWorkout(CreateOrUpdateProgramWorkoutRequest request) {
+        public async Task AddProgramWorkout(CreateOrUpdateProgramWorkoutRequest request) {
             var pw = new ProgramWorkout {
-                ProgramWorkoutId = context.ProgramWorkouts.LastOrDefault().ProgramWorkoutId++,
                 Name = request.Name,
                 AuthorId = request.AuthorId,
                 Period = request.Period
@@ -25,9 +24,10 @@ namespace Fitnes.Storage.Manager.ProgramWorkouts {
             await context.SaveChangesAsync();
         }
 
-        public void DeleteProgramWorkout(int id) {
+        public async Task DeleteProgramWorkout(int id) {
+            context.Trainers.Where(c => c.ProgramWorkoutId == id).ToList().ForEach(elem => elem.ProgramWorkoutId = null);
             context.ProgramWorkouts.Remove(context.ProgramWorkouts.Find(id));
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public async Task<IReadOnlyCollection<ProgramWorkoutWithAuthorName>> GetAll() {
@@ -50,7 +50,7 @@ namespace Fitnes.Storage.Manager.ProgramWorkouts {
                 throw new ArgumentNullException();
             return entity;
         }
-        public async void UpdateProgramWorkout(int id, CreateOrUpdateProgramWorkoutRequest request) {
+        public async Task UpdateProgramWorkout(int id, CreateOrUpdateProgramWorkoutRequest request) {
             var pw = await context.ProgramWorkouts.FindAsync(id);
             pw.Name = request.Name;
             pw.AuthorId = request.AuthorId;

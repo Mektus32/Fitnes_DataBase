@@ -281,3 +281,17 @@ C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Client\CreateClient.cshtml.g.cs
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Gym\CreateGym.cshtml.g.cs
 C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Gym\UpdateGym.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Trainer\UpdateTrainer.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Trainer\CreateTrainer.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Subscription\CreateSubscription.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Subscription\UpdateSubscription.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Employee\CreateEmployee.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Employee\UpdateEmployee.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\ProgramWorkout\CreateProgramWorkout.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\ProgramWorkout\UpdateProgramWorkout.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Author\CreateAuthor.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Position\CreatePosition.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\Position\UpdatePosition.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\TrainingMachine\ShowTrainingMachines.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\TrainingMachine\CreateTrainingMachine.cshtml.g.cs
+C:\Users\mtara\Desktop\Fitnes_DataBase\Fitnes\obj\Debug\netcoreapp3.1\Razor\Views\TrainingMachine\UpdateTrainingMachine.cshtml.g.cs

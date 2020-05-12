@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Fitnes.Storage.Manager.TrainingMachines {
     public interface ITrainingMachineManager {
-        public Task<IReadOnlyCollection<TrainingMachineWithGym>> GetAll();
-        public Task<List<KeyValuePair<bool, string>>> CreateListWithGym(int? id);
+        public Task<IReadOnlyCollection<TrainingMachine>> GetAll();
         public Task<TrainingMachine> GetTrainingMachineById(int id);
-        public void AddTrainingMachine(CreateOrUpdateTrainingMachineRequest request);
-        public void UpdateTrainingMachine(int id, CreateOrUpdateTrainingMachineRequest request);
-        public void DeleteTrainingMachine(int id);
+        public Task AddTrainingMachine(CreateOrUpdateTrainingMachineRequest request);
+        public Task UpdateTrainingMachine(int id, CreateOrUpdateTrainingMachineRequest request);
+        public Task DeleteTrainingMachine(int id);
     }
 }

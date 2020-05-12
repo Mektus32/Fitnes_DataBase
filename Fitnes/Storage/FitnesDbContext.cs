@@ -21,6 +21,9 @@ namespace Fitnes.Storage {
         public DbSet<Trainer> Trainers { get; set; }
         public DbSet<TrainingMachine> TrainingMachines { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<Trainer>()
+                .HasIndex(b => b.EmployeeId)
+                .IsUnique();
             modelBuilder.Entity<GymTrainingMachine>()
                 .HasKey(t => new { t.GymId, t.TrainingMachineId });
 

@@ -12,9 +12,8 @@ namespace Fitnes.Storage.Manager.Subscriptions {
         public SubscriptionManager(FitnesDbContext fitnesDbContext) {
             context = fitnesDbContext;
         }
-        public async void AddSubscription(CreateOrUpdateSubscriptionRequest request) {
+        public async Task AddSubscription(CreateOrUpdateSubscriptionRequest request) {
             var sub = new Subscription {
-                SubscriptionId = context.Subscriptions.LastOrDefault().SubscriptionId++,
                 Name = request.Name,
                 Price = request.Price,
                 Time = request.Time
@@ -23,9 +22,10 @@ namespace Fitnes.Storage.Manager.Subscriptions {
             await context.SaveChangesAsync();
         }
 
-        public void DeleteSubscription(int id) {
+        public async Task DeleteSubscription(int id) {
+            context.Clients.Where(c => c.SubscriptionId == id).ToList().ForEach(elem => elem.SubscriptionId = null);
             context.Subscriptions.Remove(context.Subscriptions.Find(id));
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public async Task<IReadOnlyCollection<Subscription>> GetAll() {
@@ -38,7 +38,7 @@ namespace Fitnes.Storage.Manager.Subscriptions {
                 throw new ArgumentNullException();
             return entity;
         }
-        public async void UpdateSubscription(int id, CreateOrUpdateSubscriptionRequest request) {
+        public async Task UpdateSubscription(int id, CreateOrUpdateSubscriptionRequest request) {
             var sub = await context.Subscriptions.FindAsync(id);
             sub.Name = request.Name;
             sub.Price = request.Price;

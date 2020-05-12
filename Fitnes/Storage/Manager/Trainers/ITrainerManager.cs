@@ -9,8 +9,8 @@ namespace Fitnes.Storage.Manager.Trainers {
         public Task<IReadOnlyCollection<TrainerWithPWAndEmployeeName>> GetAll();
         public Task<Trainer> GetTrainerById(int id);
         public Task<(List<KeyValuePair<int, string>>, List<KeyValuePair<int, string>>)> CreateListForViewCreateTrainer();
-        public void AddTrainer(CreateOrUpdateTrainerRequest request);
-        public void UpdateTrainer(int id, CreateOrUpdateTrainerRequest request);
-        public void DeleteTrainer(int id);
+        public Task AddTrainer(CreateOrUpdateTrainerRequest request);
+        public Task UpdateTrainer(int id, CreateOrUpdateTrainerRequest request);
+        public Task DeleteTrainer(int id);
     }
 }

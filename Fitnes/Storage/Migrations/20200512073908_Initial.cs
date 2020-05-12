@@ -158,7 +158,7 @@ namespace Fitnes.Storage.Migrations
                     TrainerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProgramWorkoutId = table.Column<int>(nullable: true),
-                    EmployeeId = table.Column<int>(nullable: true)
+                    EmployeeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -168,7 +168,7 @@ namespace Fitnes.Storage.Migrations
                         column: x => x.EmployeeId,
                         principalTable: "Employee",
                         principalColumn: "EmployeeId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Trainer_ProgramWorkout_ProgramWorkoutId",
                         column: x => x.ProgramWorkoutId,
@@ -352,7 +352,8 @@ namespace Fitnes.Storage.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Trainer_EmployeeId",
                 table: "Trainer",
-                column: "EmployeeId");
+                column: "EmployeeId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trainer_ProgramWorkoutId",

@@ -3,10 +3,50 @@
 @{
     Layout = "_Layout";
 }
-@foreach (var elem in Model) {
-    <a>@elem.Id</a>
-    <a>@elem.Name</a>
-    <a>@elem.AuthorName</a>
-    <a>@elem.Period</a>
-    <br/>
-} 
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">ProgramWorkoutId</th>
+            <th scope="col">Name</th>
+            <th scope="col">Author name</th>
+            <th scope="col">Period</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var elem in Model) {
+            <tr class="table-success">
+                <td>@elem.Id</td>
+                <td>@elem.Name</td>
+                <td>@elem.AuthorName</td>
+                <td>@elem.Period</td>
+                <td>
+                    @using (Html.BeginForm("UpdateProgramWorkout", "ProgramWorkout", FormMethod.Get)) {
+                        <div>
+                            <input type="hidden" name="id" value="@elem.Id" />
+                            <input type="submit" class="btn btn-outline-success" value="Update" />
+                        </div>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("DeleteProgramWorkout", "ProgramWorkout", FormMethod.Get)) {
+                        <div>
+                            <input type="hidden" name="id" value="@elem.Id" />
+                            <input type="submit" class="btn btn-outline-success" value="Delete" />
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@using (Html.BeginForm("CreateProgramWorkout", "ProgramWorkout", FormMethod.Get)) {
+    <div>
+        <input type="submit" class="btn btn-success" value="Add program workout" />
+    </div>
+}
+@using (Html.BeginForm("ShowAuthors", "Author", FormMethod.Get)) {
+    <div>
+        <input type="submit" class="btn btn-success" value="Show authors" />
+    </div>
+}

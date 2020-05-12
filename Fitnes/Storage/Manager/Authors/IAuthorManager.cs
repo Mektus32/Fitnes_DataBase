@@ -8,7 +8,7 @@ namespace Fitnes.Storage.Manager.Authors {
     public interface IAuthorManager {
         public Task<IReadOnlyCollection<Author>> GetAll();
         public Task<Author> GetAuthorById(int id);
-        public void AddAuthor(CreateOrUpdateAuthorRequest request);
-        public void UpdateAuthor(int id, CreateOrUpdateAuthorRequest request);
+        public Task AddAuthor(CreateOrUpdateAuthorRequest request);
+        public Task UpdateAuthor(int id, CreateOrUpdateAuthorRequest request);
     }
 }

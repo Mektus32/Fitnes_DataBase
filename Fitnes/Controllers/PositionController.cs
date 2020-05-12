@@ -24,9 +24,9 @@ namespace Fitnes.Controllers
         public ViewResult CreatePosition() => View();
 
         [HttpPost]
-        public ActionResult Create(CreateOrUpdatePositionRequest request) {
+        public async Task<ActionResult> Create(CreateOrUpdatePositionRequest request) {
             try {
-                _manager.AddPosition(request);
+                await _manager.AddPosition(request);
                 return RedirectToAction(nameof(ShowPositions));
             }
             catch (ArgumentNullException) {
@@ -44,9 +44,9 @@ namespace Fitnes.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Update(int id, CreateOrUpdatePositionRequest request) {
+        public async Task<ActionResult> Update(int id, CreateOrUpdatePositionRequest request) {
             try {
-                _manager.UpdatePosition(id, request);
+                await _manager.UpdatePosition(id, request);
                 return RedirectToAction(nameof(ShowPositions));
             }
             catch (ArgumentNullException) {

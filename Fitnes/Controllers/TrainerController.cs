@@ -29,9 +29,9 @@ namespace Fitnes.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CreateOrUpdateTrainerRequest request) {
+        public async Task<ActionResult> Create(CreateOrUpdateTrainerRequest request) {
             try {
-                _manager.AddTrainer(request);
+                await _manager.AddTrainer(request);
                 return RedirectToAction(nameof(ShowTrainers));
             }
             catch (ArgumentNullException) {
@@ -51,9 +51,9 @@ namespace Fitnes.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Update(int id, CreateOrUpdateTrainerRequest request) {
+        public async Task<ActionResult> Update(int id, CreateOrUpdateTrainerRequest request) {
             try {
-                _manager.UpdateTrainer(id, request);
+                await _manager.UpdateTrainer(id, request);
                 return RedirectToAction(nameof(ShowTrainers));
             }
             catch (ArgumentNullException) {
@@ -62,9 +62,9 @@ namespace Fitnes.Controllers
 
         }
         [HttpGet]
-        public ActionResult DeleteTrainer(int id) {
+        public async Task<ActionResult> DeleteTrainer(int id) {
             try {
-                _manager.DeleteTrainer(id);
+                await _manager.DeleteTrainer(id);
                 return RedirectToAction(nameof(ShowTrainers));
             }
             catch (ArgumentNullException) {

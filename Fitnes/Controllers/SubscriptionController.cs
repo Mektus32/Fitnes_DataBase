@@ -24,9 +24,9 @@ namespace Fitnes.Controllers
         public ViewResult CreateSubscription() => View();
 
         [HttpPost]
-        public ActionResult Create(CreateOrUpdateSubscriptionRequest request) {
+        public async Task<ActionResult> Create(CreateOrUpdateSubscriptionRequest request) {
             try {
-                _manager.AddSubscription(request);
+                await _manager.AddSubscription(request);
                 return RedirectToAction(nameof(ShowSubscriptions));
             }
             catch (ArgumentNullException) {
@@ -44,9 +44,9 @@ namespace Fitnes.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Update(int id, CreateOrUpdateSubscriptionRequest request) {
+        public async Task<ActionResult> Update(int id, CreateOrUpdateSubscriptionRequest request) {
             try {
-                _manager.UpdateSubscription(id, request);
+                await _manager.UpdateSubscription(id, request);
                 return RedirectToAction(nameof(ShowSubscriptions));
             }
             catch (ArgumentNullException) {
@@ -55,9 +55,9 @@ namespace Fitnes.Controllers
 
         }
         [HttpGet]
-        public ActionResult DeleteSubscription(int id) {
+        public async Task<ActionResult> DeleteSubscription(int id) {
             try {
-                _manager.DeleteSubscription(id);
+                await _manager.DeleteSubscription(id);
                 return RedirectToAction(nameof(ShowSubscriptions));
             }
             catch (ArgumentNullException) {

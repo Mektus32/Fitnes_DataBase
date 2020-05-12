@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitnes.Storage.Migrations
 {
     [DbContext(typeof(FitnesDbContext))]
-    [Migration("20200511200555_Initial")]
+    [Migration("20200512073908_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -421,7 +421,7 @@ namespace Fitnes.Storage.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ProgramWorkoutId")
@@ -429,7 +429,8 @@ namespace Fitnes.Storage.Migrations
 
                     b.HasKey("TrainerId");
 
-                    b.HasIndex("EmployeeId");
+                    b.HasIndex("EmployeeId")
+                        .IsUnique();
 
                     b.HasIndex("ProgramWorkoutId");
 
@@ -552,7 +553,9 @@ namespace Fitnes.Storage.Migrations
                 {
                     b.HasOne("Fitnes.Storage.Repository.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Fitnes.Storage.Repository.ProgramWorkout", "ProgramWorkout")
                         .WithMany()

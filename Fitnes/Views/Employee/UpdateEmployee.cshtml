@@ -1,0 +1,56 @@
+﻿@using Fitnes.Storage.Repository
+@model (Employee, (List<KeyValuePair<int, string>>, List<KeyValuePair<int, string>>))
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm("Update", "Employee", FormMethod.Post)) {
+    <fieldset class="container">
+        <input type="hidden" name="id" value="@Model.Item1.EmployeeId" />
+        <legend>Update data</legend>
+        <div class="form-group">
+            <label for="selectPosition">Choose position</label>
+            <select class="form-control" name="PositionId" id="selectPosition">
+                @foreach (var elem in Model.Item2.Item1) {
+                    if (elem.Key == Model.Item1.PositionId) {
+                        <option value="@elem.Key" selected>@elem.Value</option>
+                    }
+                    else {
+                        <option value="@elem.Key">@elem.Value</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" required class="form-control" name="Name" id="name" aria-describedby="nameHelp" value="@Model.Item1.Name">
+        </div>
+        <div class="form-group">
+            <label for="experience">Experience</label>
+            <input type="number" step="0.1" required class="form-control" name="Experience" id="experience" value="@Model.Item1.Experience">
+        </div>
+        <div class="form-group">
+            <label for="salary">Salary</label>
+            <input type="number" required class="form-control" name="Salary" id="salary" value="@Model.Item1.Salary">
+        </div>
+        <div class="form-group">
+            <label for="selectGym">Choose gym</label>
+            <select class="form-control" name="GymId" id="selectGym">
+                @foreach (var elem in Model.Item2.Item2) {
+                    if (elem.Key == Model.Item1.EmployeeId) {
+                        <option value="@elem.Key" selected>@elem.Value</option>
+                    }
+                    else {
+                        <option value="@elem.Key">@elem.Value</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">File input</label>
+            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+            <small id="fileHelp" class="form-text text-muted">You can input photo new employee</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </fieldset>
+}

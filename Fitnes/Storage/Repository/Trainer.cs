@@ -16,7 +16,7 @@ namespace Fitnes.Storage.Repository {
         [ForeignKey(nameof(ProgramWorkoutId))]
         public ProgramWorkout ProgramWorkout {get; set; }
 
-        public int? EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         [ForeignKey(nameof(EmployeeId))]
         public Employee Employee { get; set; }
     }

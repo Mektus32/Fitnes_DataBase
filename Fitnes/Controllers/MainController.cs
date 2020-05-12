@@ -8,9 +8,8 @@ namespace Fitnes.Controllers {
     public class Main : Controller
     {
         public ViewResult ErrorPage(string message, string call) {
-            ViewBag.ErrorMessage = message;
-            ViewBag.Call = call;
-            return View();
+            List<string> list = new List<string>() { message, call, "Show" + call + 's' , "Show " + call};
+            return View(list);
         }
         public IActionResult MainPage()
         {

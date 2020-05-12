@@ -8,7 +8,7 @@ namespace Fitnes.Storage.Manager.Positions {
     public interface IPositionManager {
         public Task<IReadOnlyCollection<Position>> GetAll();
         public Task<Position> GetPositionById(int id);
-        public void AddPosition(CreateOrUpdatePositionRequest request);
-        public void UpdatePosition(int id, CreateOrUpdatePositionRequest request);
+        public Task AddPosition(CreateOrUpdatePositionRequest request);
+        public Task UpdatePosition(int id, CreateOrUpdatePositionRequest request);
     }
 }

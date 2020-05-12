@@ -3,8 +3,25 @@
 @{
     Layout = "_Layout";
 }
-@foreach (var elem in Model) {
-    <a>@elem.PositionId</a>
-    <a>@elem.Name</a>
-    <br/>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">PositionId</th>
+            <th scope="col">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var elem in Model) {
+            <tr class="table-success">
+                <td>@elem.PositionId</td>
+                <td>@elem.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@using (Html.BeginForm("CreatePosition", "Position", FormMethod.Get)) {
+    <div>
+        <input type="submit" class="btn btn-success" value="Add position" />
+    </div>
 }

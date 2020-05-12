@@ -17,7 +17,7 @@ namespace Fitnes.Storage.Repository {
         public string Name { get; set; }
 
         [Required]
-        public int? AuthorId { get; set; }
+        public int AuthorId { get; set; }
         [ForeignKey(nameof(AuthorId))]
         public Author Author { get; set; }
 

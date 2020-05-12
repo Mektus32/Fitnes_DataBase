@@ -12,9 +12,8 @@ namespace Fitnes.Storage.Manager.Authors {
             this.context = fitnesDbContext;
         }
 
-        public async void AddAuthor(CreateOrUpdateAuthorRequest request) {
+        public async Task AddAuthor(CreateOrUpdateAuthorRequest request) {
             var auth = new Author {
-                AuthorId = context.Authors.LastOrDefault().AuthorId++,
                 Name = request.Name
             };
             await context.Authors.AddAsync(auth);
@@ -32,8 +31,8 @@ namespace Fitnes.Storage.Manager.Authors {
             return entity;
         }
 
-        public async void UpdateAuthor(int id, CreateOrUpdateAuthorRequest request) {
-            var auth = await context.Authors.FindAsync(id);//TODO check exception
+        public async Task UpdateAuthor(int id, CreateOrUpdateAuthorRequest request) {
+            var auth = await context.Authors.FindAsync(id);
             auth.Name = request.Name;
             await context.SaveChangesAsync();
         }

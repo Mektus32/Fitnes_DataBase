@@ -3,10 +3,46 @@
 @{
     Layout = "_Layout";
 }
-@foreach (var elem in Model) {
-    <a>@elem.SubscriptionId</a>
-    <a>@elem.Name</a>
-    <a>@elem.Price</a>
-    <a>@elem.Time</a>
-    <br/>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">SubscriptioId</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Months</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var elem in Model) {
+            <tr class="table-success">
+                <td><img style="height: 50px; width: 50px; display: block;" src="~/img/MainBG.jpg" alt="@elem.Name photo"></td>
+                <td>@elem.SubscriptionId</td>
+                <td>@elem.Name</td>
+                <td>@elem.Price</td>
+                <td>@elem.Time</td>
+                <td>
+                    @using (Html.BeginForm("UpdateSubscription", "Subscription", FormMethod.Get)) {
+                        <div>
+                            <input type="hidden" name="id" value="@elem.SubscriptionId" />
+                            <input type="submit" class="btn btn-outline-success" value="Update" />
+                        </div>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("DeleteSubscription", "Subscription", FormMethod.Get)) {
+                        <div>
+                            <input type="hidden" name="id" value="@elem.SubscriptionId" />
+                            <input type="submit" class="btn btn-outline-success" value="Delete" />
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@using (Html.BeginForm("CreateSubscription", "Subscription", FormMethod.Get)) {
+    <div>
+        <input type="submit" class="btn btn-success" value="Add subscription" />
+    </div>
 }

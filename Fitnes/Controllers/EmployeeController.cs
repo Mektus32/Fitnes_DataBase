@@ -26,9 +26,9 @@ namespace Fitnes.Controllers
             return View(tup);
         }
         [HttpPost]
-        public ActionResult Create(CreateOrUpdateEmployeeRequest request) {
+        public async Task<ActionResult> Create(CreateOrUpdateEmployeeRequest request) {
             try {
-                _manager.AddEmployee(request);
+                await _manager.AddEmployee(request);
                 return RedirectToAction(nameof(ShowEmployees));
             }
             catch (ArgumentNullException) {
@@ -36,7 +36,7 @@ namespace Fitnes.Controllers
             }
         }
         [HttpGet]
-        public async Task<ActionResult> UpdateEmployeet(int id) {
+        public async Task<ActionResult> UpdateEmployee(int id) {
             try {
                 var entity = await _manager.GetEmployeeById(id);
                 var tmp = await _manager.CreateListForViewCreateEmployee();
@@ -48,9 +48,9 @@ namespace Fitnes.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Update(int id, CreateOrUpdateEmployeeRequest request) {
+        public async Task<ActionResult> Update(int id, CreateOrUpdateEmployeeRequest request) {
             try {
-                _manager.UpdateEmployee(id, request);
+                await _manager.UpdateEmployee(id, request);
                 return RedirectToAction(nameof(ShowEmployees));
             }
             catch (ArgumentNullException) {
@@ -59,9 +59,9 @@ namespace Fitnes.Controllers
 
         }
         [HttpGet]
-        public ActionResult DeleteCEmployee(int id) {
+        public async Task<ActionResult> DeleteCEmployee(int id) {
             try {
-                _manager.DeleteEmployee(id);
+                await _manager.DeleteEmployee(id);
                 return RedirectToAction(nameof(ShowEmployees));
             }
             catch (ArgumentNullException) {

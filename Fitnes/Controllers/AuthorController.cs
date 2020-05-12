@@ -24,9 +24,9 @@ namespace Fitnes.Controllers
         public ViewResult CreateAuthor() => View();
 
         [HttpPost]
-        public ActionResult Create(CreateOrUpdateAuthorRequest request) {
+        public async Task<ActionResult> Create(CreateOrUpdateAuthorRequest request) {
             try {
-                _manager.AddAuthor(request);
+                await _manager.AddAuthor(request);
                 return RedirectToAction(nameof(ShowAuthors));
             } catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not add new author", call = nameof(Author) });
@@ -42,9 +42,9 @@ namespace Fitnes.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Update(int id, CreateOrUpdateAuthorRequest request) {
+        public async Task<ActionResult> Update(int id, CreateOrUpdateAuthorRequest request) {
             try {
-                _manager.UpdateAuthor(id, request);
+                await _manager.UpdateAuthor(id, request);
                 return RedirectToAction(nameof(ShowAuthors));
             } catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new {message = "Error: can not update author", call = nameof(Author) });

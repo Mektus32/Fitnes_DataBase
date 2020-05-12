@@ -10,8 +10,8 @@ namespace Fitnes.Storage.Manager.ProgramWorkouts {
         public Task<IReadOnlyCollection<ProgramWorkoutWithAuthorName>> GetAll();
         public Task<ProgramWorkout> GetProgramWorkoutById(int id);
         public Task<List<KeyValuePair<int, string>>> CreateListForViewCreateProgramWorkout();
-        public void AddProgramWorkout(CreateOrUpdateProgramWorkoutRequest request);
-        public void UpdateProgramWorkout(int id, CreateOrUpdateProgramWorkoutRequest request);
-        public void DeleteProgramWorkout(int id);
+        public Task AddProgramWorkout(CreateOrUpdateProgramWorkoutRequest request);
+        public Task UpdateProgramWorkout(int id, CreateOrUpdateProgramWorkoutRequest request);
+        public Task DeleteProgramWorkout(int id);
     }
 }

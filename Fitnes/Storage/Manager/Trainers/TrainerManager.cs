@@ -11,9 +11,8 @@ namespace Fitnes.Storage.Manager.Trainers {
         public TrainerManager(FitnesDbContext fitnesDbContext) {
             context = fitnesDbContext;
         }
-        public async void AddTrainer(CreateOrUpdateTrainerRequest request) {
+        public async Task AddTrainer(CreateOrUpdateTrainerRequest request) {
             var tr = new Trainer {
-                TrainerId = context.Trainers.LastOrDefault().TrainerId++,
                 ProgramWorkoutId = request.ProgramWorkoutId,
                 EmployeeId = request.EmployeeId
             };
@@ -21,9 +20,10 @@ namespace Fitnes.Storage.Manager.Trainers {
             await context.SaveChangesAsync();
         }
 
-        public void DeleteTrainer(int id) {
+        public async Task DeleteTrainer(int id) {
+            context.Clients.Where(c => c.TrainerId == id).ToList().ForEach(elem => elem.TrainerId = null);
             context.Trainers.Remove(context.Trainers.Find(id));
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public async Task<IReadOnlyCollection<TrainerWithPWAndEmployeeName>> GetAll() {
@@ -33,7 +33,7 @@ namespace Fitnes.Storage.Manager.Trainers {
                 listWithNames.Add(new TrainerWithPWAndEmployeeName() {
                     Id = elem.TrainerId,
                     Name = context.Employees.Find(context.Trainers.Find(elem.TrainerId).EmployeeId).Name,
-                    ProgramWorkoutName = context.ProgramWorkouts.Find(elem.ProgramWorkoutId).Name
+                    ProgramWorkoutName = elem.ProgramWorkoutId != null ? context.ProgramWorkouts.Find(elem.ProgramWorkoutId).Name : null
                 });
             }
             return listWithNames;
@@ -45,17 +45,22 @@ namespace Fitnes.Storage.Manager.Trainers {
                 throw new ArgumentNullException();
             return entity;
         }
-        public async void UpdateTrainer(int id, CreateOrUpdateTrainerRequest request) {
+        public async Task UpdateTrainer(int id, CreateOrUpdateTrainerRequest request) {
+            var emp = context.Employees.Find(request.EmployeeId).PositionId = 2;
             var pw = await context.Trainers.FindAsync(id);
             pw.EmployeeId = request.EmployeeId;
-            pw.ProgramWorkoutId = request.ProgramWorkoutId;
+            pw.ProgramWorkoutId = request.ProgramWorkoutId != 0 ? request.ProgramWorkoutId : null;
             await context.SaveChangesAsync();
         }
         public async Task<(List<KeyValuePair<int, string>>, List<KeyValuePair<int, string>>)> CreateListForViewCreateTrainer() {
             List<KeyValuePair<int, string>> listProgramWorkouts = new List<KeyValuePair<int, string>>();
             await context.ProgramWorkouts.ForEachAsync(elem => listProgramWorkouts.Add(new KeyValuePair<int, string>(elem.ProgramWorkoutId, elem.Name)));
             List<KeyValuePair<int, string>> listEmployees = new List<KeyValuePair<int, string>>();
-            await context.Employees.ForEachAsync(elem => listProgramWorkouts.Add(new KeyValuePair<int, string>(elem.EmployeeId, elem.Name)));
+            foreach (var elem in context.Employees) {
+                if (elem.PositionId == 2) {
+                    listEmployees.Add(new KeyValuePair<int, string>(elem.EmployeeId, elem.Name));
+                }
+            }
             return (listProgramWorkouts, listEmployees);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Fitnes.Storage;
 using Fitnes.Storage.Manager.Employers;
+using Fitnes.Storage.Manager.Trainers;
 using Fitnes.Storage.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,9 +15,8 @@ namespace Fitnes.Storage.Manager.Employers {
             context = fitnesDbContext;
         }
 
-        public async void AddEmployee(CreateOrUpdateEmployeeRequest request) {
+        public async Task AddEmployee(CreateOrUpdateEmployeeRequest request) {
             var emp = new Employee {
-                EmployeeId = context.Employees.LastOrDefault().EmployeeId++,
                 Name = request.Name,
                 PositionId = request.PositionId,
                 Experience = request.Experience,
@@ -26,9 +26,13 @@ namespace Fitnes.Storage.Manager.Employers {
             await context.Employees.AddAsync(emp);
             await context.SaveChangesAsync();
         }
-        public void DeleteEmployee(int id) {
+        public async Task DeleteEmployee(int id) {
+            var tr = await context.Trainers.Where(c => c.EmployeeId == id).ToListAsync();
+            var man = new TrainerManager(context);
+            if (tr != null)
+                await man.DeleteTrainer(tr[0].TrainerId);
             context.Employees.Remove(context.Employees.Find(id));
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
         public async Task<IReadOnlyCollection<EmployeeWithPositionAndGymName>> GetAll() {
             var tmp = await context.Employees.Include(c => c).ToListAsync();
@@ -51,7 +55,14 @@ namespace Fitnes.Storage.Manager.Employers {
                 throw new ArgumentNullException();
             return entity;
         }
-        public async void UpdateEmployee(int id, CreateOrUpdateEmployeeRequest request) {
+        public async Task UpdateEmployee(int id, CreateOrUpdateEmployeeRequest request) {
+            if (request.PositionId != 2) {
+                var tr = await context.Trainers.Where(c => c.EmployeeId == id).ToListAsync();
+                if (tr != null) {
+                    var man = new TrainerManager(context);
+                    await man.DeleteTrainer(tr[0].TrainerId);
+                }
+            }
             var emp = await context.Employees.FindAsync(id);
             emp.Name = request.Name;
             emp.PositionId = request.PositionId;

@@ -12,9 +12,8 @@ namespace Fitnes.Storage.Manager.Positions {
         public PositionManager(FitnesDbContext fitnesDbContext) {
             context = fitnesDbContext;
         }
-        public async void AddPosition(CreateOrUpdatePositionRequest request) {
+        public async Task AddPosition(CreateOrUpdatePositionRequest request) {
             var pos = new Author {
-                AuthorId = context.Authors.LastOrDefault().AuthorId++,
                 Name = request.Name
             };
             await context.Authors.AddAsync(pos);
@@ -29,7 +28,7 @@ namespace Fitnes.Storage.Manager.Positions {
                 throw new ArgumentNullException();
             return entity;
         }
-        public async void UpdatePosition(int id, CreateOrUpdatePositionRequest request) {
+        public async Task UpdatePosition(int id, CreateOrUpdatePositionRequest request) {
             var pos = await context.Positions.FindAsync(id);//TODO check exception
             pos.Name = request.Name;
             await context.SaveChangesAsync();
