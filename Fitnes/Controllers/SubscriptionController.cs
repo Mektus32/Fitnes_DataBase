@@ -6,6 +6,7 @@ using Fitnes.Storage.Manager.Subscriptions;
 using Fitnes.Storage;
 using Fitnes.Storage.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fitnes.Controllers
 {
@@ -32,6 +33,12 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not add new subscription", call = nameof(Subscription) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Subscription) });
+            }
+            catch (ArgumentException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: value should be positiv", call = nameof(Subscription) });
+            }
         }
         [HttpGet]
         public async Task<ActionResult> UpdateSubscription(int id) {
@@ -41,6 +48,9 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not find subscription with this id", call = nameof(Subscription) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Subscription) });
             }
         }
         [HttpPost]
@@ -52,7 +62,12 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not update subscription", call = nameof(Subscription) });
             }
-
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Subscription) });
+            }
+            catch (ArgumentException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: value should be positiv", call = nameof(Subscription) });
+            }
         }
         [HttpGet]
         public async Task<ActionResult> DeleteSubscription(int id) {
@@ -62,6 +77,29 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not delete subscription", call = nameof(Subscription) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Subscription) });
+            }
+        }
+        public ActionResult SearchSubscription(string text, int term) {
+            try {
+                var list = _manager.SearchSubscription(text, term);
+                if (list.Count == 0)
+                    throw new ArgumentOutOfRangeException();
+                return View(list);
+            }
+            catch (ArgumentOutOfRangeException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Info: no elements", call = nameof(Subscription), output = "Information" });
+            }
+            catch (ArgumentNullException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Subscription) });
+            }
+            catch (FormatException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Subscription) });
+            }
+            catch (Exception) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: unexpected exception", call = nameof(Subscription) });
             }
         }
     }

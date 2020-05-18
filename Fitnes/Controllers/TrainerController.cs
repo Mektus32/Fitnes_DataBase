@@ -53,6 +53,9 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not find trainer with this id", call = nameof(Trainer) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Trainer) });
+            }
         }
         [HttpPost]
         public async Task<ActionResult> Update(int id, CreateOrUpdateTrainerRequest request) {
@@ -62,6 +65,9 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not update trainer", call = nameof(Trainer) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Trainer) });
             }
 
         }
@@ -73,6 +79,9 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not delete trainer", call = nameof(Trainer) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Trainer) });
             }
         }
     }

@@ -6,6 +6,7 @@ using Fitnes.Storage;
 using Fitnes.Storage.Manager.ProgramWorkouts;
 using Fitnes.Storage.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fitnes.Controllers
 {
@@ -35,6 +36,12 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not add new program workout", call = nameof(ProgramWorkout) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(ProgramWorkout) });
+            }
+            catch (ArgumentException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: value should be positiv", call = nameof(ProgramWorkout) });
+            }
         }
         [HttpGet]
         public async Task<ActionResult> UpdateProgramWorkout(int id) {
@@ -47,6 +54,9 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not find program workout with this id", call = nameof(ProgramWorkout) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(ProgramWorkout) });
+            }
         }
         [HttpPost]
         public async Task<ActionResult> Update(int id, CreateOrUpdateProgramWorkoutRequest request) {
@@ -57,7 +67,12 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not update program workout", call = nameof(ProgramWorkout) });
             }
-
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(ProgramWorkout) });
+            }
+            catch (ArgumentException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: value should be positiv", call = nameof(ProgramWorkout) });
+            }
         }
         [HttpGet]
         public async Task<ActionResult> DeleteProgramWorkout(int id) {
@@ -67,6 +82,29 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not delete program workout", call = nameof(ProgramWorkout) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(ProgramWorkout) });
+            }
+        }
+        public ActionResult SearchProgramWorkout(string text, int term) {
+            try {
+                var list = _manager.SearchProgramWorkout(text, term);
+                if (list.Count == 0)
+                    throw new ArgumentOutOfRangeException();
+                return View(list);
+            }
+            catch (ArgumentOutOfRangeException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Info: no elements", call = nameof(ProgramWorkout), output = "Information" });
+            }
+            catch (ArgumentNullException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(ProgramWorkout) });
+            }
+            catch (FormatException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(ProgramWorkout) });
+            }
+            catch (Exception) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: unexpected exception", call = nameof(ProgramWorkout) });
             }
         }
     }

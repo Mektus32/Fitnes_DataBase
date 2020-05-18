@@ -8,7 +8,7 @@ namespace Fitnes.Storage.Manager.Employers {
         public int Id { get; set; }
         public string Name { get; set; }
         public string PositionName { get; set; }
-        public double Experience { get; set; }
+        public int Experience { get; set; }
         public ushort Salary { get; set; }
         public string GymName { get; set; }
     }

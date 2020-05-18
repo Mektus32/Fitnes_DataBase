@@ -11,5 +11,6 @@ namespace Fitnes.Storage.Manager.Subscriptions {
         public Task AddSubscription(CreateOrUpdateSubscriptionRequest request);
         public Task UpdateSubscription(int id, CreateOrUpdateSubscriptionRequest request);
         public Task DeleteSubscription(int id);
+        public List<Subscription> SearchSubscription(string text, int term);
     }
 }

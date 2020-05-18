@@ -4,6 +4,29 @@
     Layout = "_Layout";
 }
     <div class="container">
+        @using (Html.BeginForm("SearchEmployee", "Employee", FormMethod.Post)) {
+            <div class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" required type="text" name="text" placeholder="Search" value="">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="term" id="option1" value="1" autocomplete="off" checked> Position name
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="term" id="option2" value="2" autocomplete="off"> Name
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="term" id="option3" value="3" autocomplete="off"> Experience
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="term" id="option4" value="4" autocomplete="off"> Salary
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="term" id="option5" value="5" autocomplete="off"> Gym name
+                    </label>
+                </div>
+            </div>
+        }
         <table class="table table-hover">
             <thead>
                 <tr>

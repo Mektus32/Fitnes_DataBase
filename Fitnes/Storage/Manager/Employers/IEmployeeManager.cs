@@ -13,5 +13,6 @@ namespace Fitnes.Storage.Manager.Employers {
         public Task AddEmployee(CreateOrUpdateEmployeeRequest request);
         public Task UpdateEmployee(int id, CreateOrUpdateEmployeeRequest request);
         public Task DeleteEmployee(int id);
+        public List<EmployeeWithPositionAndGymName> SearchEmployee(string text, int term);
     }
 }

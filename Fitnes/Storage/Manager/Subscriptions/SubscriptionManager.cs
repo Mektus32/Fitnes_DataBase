@@ -13,6 +13,9 @@ namespace Fitnes.Storage.Manager.Subscriptions {
             context = fitnesDbContext;
         }
         public async Task AddSubscription(CreateOrUpdateSubscriptionRequest request) {
+            if (request.Price <= 0 || request.Time <= 0) {
+                throw new ArgumentException();
+            }
             var sub = new Subscription {
                 Name = request.Name,
                 Price = request.Price,
@@ -39,11 +42,22 @@ namespace Fitnes.Storage.Manager.Subscriptions {
             return entity;
         }
         public async Task UpdateSubscription(int id, CreateOrUpdateSubscriptionRequest request) {
+            if (request.Price <= 0 || request.Time <= 0) {
+                throw new ArgumentException();
+            } 
             var sub = await context.Subscriptions.FindAsync(id);
             sub.Name = request.Name;
             sub.Price = request.Price;
             sub.Time = request.Time;
             await context.SaveChangesAsync();
+        }
+        public List<Subscription> SearchSubscription(string text, int term) {
+            switch (term) {
+                case 1: return context.Subscriptions.Where(c => c.Name.IndexOf(text) >= 0).ToList();
+                case 2: return context.Subscriptions.Where(c => c.Price == Convert.ToInt32(text)).ToList();
+                case 3: return context.Subscriptions.Where(c => c.Time == Convert.ToInt32(text)).ToList();
+                default: throw new ArgumentNullException();
+            }
         }
     }
 }

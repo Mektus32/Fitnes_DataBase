@@ -13,10 +13,10 @@ namespace Fitnes.Storage.Manager.Positions {
             context = fitnesDbContext;
         }
         public async Task AddPosition(CreateOrUpdatePositionRequest request) {
-            var pos = new Author {
+            var pos = new Position {
                 Name = request.Name
             };
-            await context.Authors.AddAsync(pos);
+            await context.Positions.AddAsync(pos);
             await context.SaveChangesAsync();
         }
         public async Task<IReadOnlyCollection<Position>> GetAll() {

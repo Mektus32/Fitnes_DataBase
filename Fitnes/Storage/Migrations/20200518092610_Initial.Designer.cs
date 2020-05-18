@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitnes.Storage.Migrations
 {
     [DbContext(typeof(FitnesDbContext))]
-    [Migration("20200512121258_Initial")]
+    [Migration("20200518092610_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,7 +103,8 @@ namespace Fitnes.Storage.Migrations
                             ClientId = 3,
                             LastName = "Sharshan",
                             Name = "Mike",
-                            SubscriptionId = 3
+                            SubscriptionId = 3,
+                            TrainerId = 1
                         },
                         new
                         {
@@ -122,8 +123,8 @@ namespace Fitnes.Storage.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("Experience")
-                        .HasColumnType("float");
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
 
                     b.Property<int?>("GymId")
                         .HasColumnType("int");
@@ -151,7 +152,7 @@ namespace Fitnes.Storage.Migrations
                         new
                         {
                             EmployeeId = 1,
-                            Experience = 0.0,
+                            Experience = 0,
                             GymId = 1,
                             Name = "Ivan",
                             PositionId = 1,
@@ -160,7 +161,7 @@ namespace Fitnes.Storage.Migrations
                         new
                         {
                             EmployeeId = 2,
-                            Experience = 2.0,
+                            Experience = 2,
                             GymId = 1,
                             Name = "Vadim",
                             PositionId = 2,
@@ -169,7 +170,7 @@ namespace Fitnes.Storage.Migrations
                         new
                         {
                             EmployeeId = 3,
-                            Experience = 0.5,
+                            Experience = 5,
                             GymId = 1,
                             Name = "Anton",
                             PositionId = 3,
@@ -178,7 +179,7 @@ namespace Fitnes.Storage.Migrations
                         new
                         {
                             EmployeeId = 4,
-                            Experience = 0.0,
+                            Experience = 0,
                             GymId = 2,
                             Name = "Kate",
                             PositionId = 1,
@@ -187,7 +188,7 @@ namespace Fitnes.Storage.Migrations
                         new
                         {
                             EmployeeId = 5,
-                            Experience = 2.0,
+                            Experience = 2,
                             GymId = 2,
                             Name = "Liza",
                             PositionId = 2,
@@ -196,7 +197,7 @@ namespace Fitnes.Storage.Migrations
                         new
                         {
                             EmployeeId = 6,
-                            Experience = 0.5,
+                            Experience = 5,
                             GymId = 2,
                             Name = "Dasha",
                             PositionId = 3,

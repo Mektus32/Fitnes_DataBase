@@ -6,6 +6,7 @@ using Fitnes.Storage;
 using Fitnes.Storage.Manager.Gyms;
 using Fitnes.Storage.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fitnes.Controllers
 {
@@ -35,6 +36,9 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not add new gym", call = nameof(Gym) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Gym) });
+            }
         }
         [HttpGet]
         public async Task<ActionResult> UpdateGym(int id) {
@@ -47,6 +51,9 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not find gym with this id", call = nameof(Gym) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Gym) });
+            }
         }
         [HttpPost]
         public async Task<ActionResult> Update(int id, CreateOrUpdateGymRequest request) {
@@ -56,6 +63,9 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not update gym", call = nameof(Gym) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Gym) });
             }
 
         }
@@ -67,6 +77,9 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not delete gym", call = nameof(Gym) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Gym) });
             }
         }
     }

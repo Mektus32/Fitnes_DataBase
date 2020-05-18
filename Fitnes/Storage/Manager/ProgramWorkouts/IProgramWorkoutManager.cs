@@ -13,5 +13,6 @@ namespace Fitnes.Storage.Manager.ProgramWorkouts {
         public Task AddProgramWorkout(CreateOrUpdateProgramWorkoutRequest request);
         public Task UpdateProgramWorkout(int id, CreateOrUpdateProgramWorkoutRequest request);
         public Task DeleteProgramWorkout(int id);
+        public List<ProgramWorkoutWithAuthorName> SearchProgramWorkout(string text, int term);
     }
 }

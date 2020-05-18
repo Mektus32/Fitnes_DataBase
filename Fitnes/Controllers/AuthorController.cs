@@ -7,6 +7,7 @@ using Fitnes.Storage.Manager;
 using Fitnes.Storage.Manager.Authors;
 using Fitnes.Storage.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fitnes.Controllers
 {
@@ -31,6 +32,9 @@ namespace Fitnes.Controllers
             } catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not add new author", call = nameof(Author) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Author) });
+            }
         }
         [HttpGet]
         public async Task<ActionResult> UpdateAuthor(int id) {
@@ -39,6 +43,9 @@ namespace Fitnes.Controllers
                 return View(entity);
             } catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not find author with this id", call = nameof(Author) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Author) });
             }
         }
         [HttpPost]
@@ -49,7 +56,10 @@ namespace Fitnes.Controllers
             } catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new {message = "Error: can not update author", call = nameof(Author) });
             }
-            
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Author) });
+            }
+
         }
     }
 }

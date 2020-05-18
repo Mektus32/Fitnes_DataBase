@@ -20,20 +20,20 @@
         </div>
         <div class="form-group">
             <label for="experience">Experience</label>
-            <input type="number" step="0.1" required class="form-control" name="Experience" id="experience" value="">
+            <input type="number" required class="form-control" min="0" name="Experience" id="experience" value="">
         </div>
         <div class="form-group">
             <label for="salary">Salary</label>
-            <input type="number" required class="form-control" name="Salary" id="salary" value="">
+            <input type="number" required class="form-control" min="1" name="Salary" id="salary" value="">
         </div>
         <div class="form-group">
             <label for="selectGym">Choose gym</label>
-            <select class="form-control" name="GymId" id="selectGym">
+            <select class="form-control" required name="GymId" id="selectGym">
                 @foreach (var elem in Model.Item2) {
                     <option value="@elem.Key">@elem.Value</option>
                 }
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Create</button>
     </fieldset>
 }
