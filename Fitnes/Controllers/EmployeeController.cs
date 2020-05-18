@@ -6,6 +6,7 @@ using Fitnes.Storage.Manager.Employers;
 using Fitnes.Storage;
 using Fitnes.Storage.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fitnes.Controllers
 {
@@ -34,6 +35,12 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not add new employeer", call = nameof(Employee) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Employee) });
+            }
+            catch (ArgumentException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: value should be positiv", call = nameof(Employee) });
+            }
         }
         [HttpGet]
         public async Task<ActionResult> UpdateEmployee(int id) {
@@ -46,6 +53,9 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not find emploeer with this id", call = nameof(Employee) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Employee) });
+            }
         }
         [HttpPost]
         public async Task<ActionResult> Update(int id, CreateOrUpdateEmployeeRequest request) {
@@ -56,7 +66,12 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not update employee", call = nameof(Employee) });
             }
-
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Employee) });
+            }
+            catch (ArgumentException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: value should be positiv", call = nameof(Employee) });
+            }
         }
         [HttpGet]
         public async Task<ActionResult> DeleteEmployee(int id) {
@@ -66,6 +81,29 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not delete employee", call = nameof(Employee) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Employee) });
+            }
+        }
+        public ActionResult SearchEmployee(string text, int term) {
+            try {
+                var list = _manager.SearchEmployee(text, term);
+                if (list.Count == 0)
+                    throw new ArgumentOutOfRangeException();
+                return View(list);
+            }
+            catch (ArgumentOutOfRangeException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Info: no elements", call = nameof(Employee), output = "Information" });
+            }
+            catch (ArgumentNullException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Employee)});
+            }
+            catch (FormatException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Employee) });
+            }
+            catch (Exception) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: unexpected exception", call = nameof(Employee) });
             }
         }
     }

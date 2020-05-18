@@ -15,6 +15,9 @@ namespace Fitnes.Storage.Manager.ProgramWorkouts {
         }
 
         public async Task AddProgramWorkout(CreateOrUpdateProgramWorkoutRequest request) {
+            if (request.Period <= 0) {
+                throw new ArgumentException();
+            }
             var pw = new ProgramWorkout {
                 Name = request.Name,
                 AuthorId = request.AuthorId,
@@ -51,6 +54,9 @@ namespace Fitnes.Storage.Manager.ProgramWorkouts {
             return entity;
         }
         public async Task UpdateProgramWorkout(int id, CreateOrUpdateProgramWorkoutRequest request) {
+            if (request.Period <= 0) {
+                throw new ArgumentException();
+            }
             var pw = await context.ProgramWorkouts.FindAsync(id);
             pw.Name = request.Name;
             pw.AuthorId = request.AuthorId;
@@ -61,6 +67,23 @@ namespace Fitnes.Storage.Manager.ProgramWorkouts {
             List<KeyValuePair<int, string>> listAuthors = new List<KeyValuePair<int, string>>();
             await context.Authors.ForEachAsync(elem => listAuthors.Add(new KeyValuePair<int, string>(elem.AuthorId, elem.Name)));
             return listAuthors;
+        }
+        public List<ProgramWorkoutWithAuthorName> SearchProgramWorkout(string text, int term) {
+            var list = new List<ProgramWorkoutWithAuthorName>();
+            foreach (var elem in context.ProgramWorkouts) {
+                list.Add(new ProgramWorkoutWithAuthorName() {
+                    Id = elem.ProgramWorkoutId,
+                    Name = elem.Name,
+                    AuthorName = context.Authors.Find(elem.AuthorId).Name,
+                    Period = elem.Period
+                });
+            }
+            switch (term) {
+                case 1: return list.Where(c => c.Name.IndexOf(text) >= 0).ToList();
+                case 2: return list.Where(c => c.AuthorName.IndexOf(text) >= 0).ToList();
+                case 3: return list.Where(c => c.Period == Convert.ToInt32(text)).ToList();
+                default: throw new ArgumentNullException();
+            }
         }
     }
 }

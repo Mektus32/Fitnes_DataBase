@@ -106,7 +106,7 @@ namespace Fitnes.Storage.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     PositionId = table.Column<int>(nullable: true),
-                    Experience = table.Column<double>(nullable: false),
+                    Experience = table.Column<int>(nullable: false),
                     Salary = table.Column<int>(nullable: false),
                     GymId = table.Column<int>(nullable: true)
                 },
@@ -254,21 +254,16 @@ namespace Fitnes.Storage.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Client",
-                columns: new[] { "ClientId", "LastName", "Name", "SubscriptionId", "TrainerId" },
-                values: new object[] { 3, "Sharshan", "Mike", 3, null });
-
-            migrationBuilder.InsertData(
                 table: "Employee",
                 columns: new[] { "EmployeeId", "Experience", "GymId", "Name", "PositionId", "Salary" },
                 values: new object[,]
                 {
-                    { 1, 0.0, 1, "Ivan", 1, 20 },
-                    { 4, 0.0, 2, "Kate", 1, 20 },
-                    { 2, 2.0, 1, "Vadim", 2, 50 },
-                    { 5, 2.0, 2, "Liza", 2, 50 },
-                    { 3, 0.5, 1, "Anton", 3, 30 },
-                    { 6, 0.5, 2, "Dasha", 3, 30 }
+                    { 1, 0, 1, "Ivan", 1, 20 },
+                    { 4, 0, 2, "Kate", 1, 20 },
+                    { 2, 2, 1, "Vadim", 2, 50 },
+                    { 5, 2, 2, "Liza", 2, 50 },
+                    { 3, 5, 1, "Anton", 3, 30 },
+                    { 6, 5, 2, "Dasha", 3, 30 }
                 });
 
             migrationBuilder.InsertData(
@@ -307,17 +302,13 @@ namespace Fitnes.Storage.Migrations
             migrationBuilder.InsertData(
                 table: "Client",
                 columns: new[] { "ClientId", "LastName", "Name", "SubscriptionId", "TrainerId" },
-                values: new object[] { 2, "Islanova", "Ayka", 2, 2 });
-
-            migrationBuilder.InsertData(
-                table: "Client",
-                columns: new[] { "ClientId", "LastName", "Name", "SubscriptionId", "TrainerId" },
-                values: new object[] { 1, "Tarasyan", "Mike", 1, 1 });
-
-            migrationBuilder.InsertData(
-                table: "Client",
-                columns: new[] { "ClientId", "LastName", "Name", "SubscriptionId", "TrainerId" },
-                values: new object[] { 4, "Konopkin", "Dima", 1, 1 });
+                values: new object[,]
+                {
+                    { 2, "Islanova", "Ayka", 2, 2 },
+                    { 1, "Tarasyan", "Mike", 1, 1 },
+                    { 3, "Sharshan", "Mike", 3, 1 },
+                    { 4, "Konopkin", "Dima", 1, 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Client_SubscriptionId",

@@ -6,6 +6,7 @@ using Fitnes.Storage.Manager.Clients;
 using Fitnes.Storage;
 using Fitnes.Storage.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fitnes.Controllers
 {
@@ -36,6 +37,9 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not add new client", call = nameof(Client) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Client) });
+            }
         }
         [HttpGet]
         public async Task<ActionResult> UpdateClient(int id) {
@@ -48,6 +52,9 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not find client with this id", call = nameof(Client) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Client) });
+            }
         }
         [HttpPost]
         public async  Task<ActionResult> Update(int id, CreateOrUpdateClientRequest request) {
@@ -57,6 +64,9 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not update client", call = nameof(Client) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Client) });
             }
 
         }
@@ -69,16 +79,26 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not delete client", call = nameof(Client) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Client) });
+            }
         }
         public ActionResult SearchClient(string text, int term) {
             try {
                 var list = _manager.SearchClient(text, term);
+                if (list.Count == 0)
+                    throw new ArgumentOutOfRangeException();
                 return View(list);
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(Client) });
             }
-
+            catch (ArgumentOutOfRangeException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Info: no elements", call = nameof(Client), output = "Information" });
+            }
+            catch (Exception) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: unexpected exception", call = nameof(Client) });
+            }
         }
     }
 }

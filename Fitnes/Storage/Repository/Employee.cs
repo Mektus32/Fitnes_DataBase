@@ -21,7 +21,7 @@ namespace Fitnes.Storage.Repository {
         public Position Position { get; set; }
 
         [Required]
-        public double Experience { get; set; }
+        public int Experience { get; set; }
 
         [Required]
         public ushort Salary { get; set; }

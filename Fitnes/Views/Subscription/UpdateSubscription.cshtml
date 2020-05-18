@@ -14,11 +14,11 @@
         </div>
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="number" required class="form-control" name="Price" id="price" value="@Model.Price">
+            <input type="number" required class="form-control" min="1" name="Price" id="price" value="@Model.Price">
         </div>
         <div class="form-group">
             <label for="time">Months</label>
-            <input type="number" required class="form-control" name="Time" id="price" value="@Model.Time">
+            <input type="number" required class="form-control" min="1" name="Time" id="price" value="@Model.Time">
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </fieldset>

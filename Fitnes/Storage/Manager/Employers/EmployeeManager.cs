@@ -3,6 +3,7 @@ using Fitnes.Storage.Manager.Employers;
 using Fitnes.Storage.Manager.Trainers;
 using Fitnes.Storage.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,9 @@ namespace Fitnes.Storage.Manager.Employers {
         }
 
         public async Task AddEmployee(CreateOrUpdateEmployeeRequest request) {
+            if (request.Experience < 0 || request.Salary <= 0) {
+                throw new ArgumentException();
+            }
             var emp = new Employee {
                 Name = request.Name,
                 PositionId = request.PositionId,
@@ -44,7 +48,7 @@ namespace Fitnes.Storage.Manager.Employers {
                     PositionName = context.Positions.Find(elem.PositionId).Name,
                     Experience = elem.Experience,
                     Salary = elem.Salary,
-                    GymName = context.Employees.Find(elem.GymId).Name
+                    GymName = elem.GymId != null ? context.Gyms.Find(elem.GymId).Name : null
                 });
             }
             return listWithNames;
@@ -56,6 +60,9 @@ namespace Fitnes.Storage.Manager.Employers {
             return entity;
         }
         public async Task UpdateEmployee(int id, CreateOrUpdateEmployeeRequest request) {
+            if (request.Experience < 0 || request.Salary <= 0) {
+                throw new ArgumentException();
+            }
             if (request.PositionId != 2) {
                 var tr = await context.Trainers.Where(c => c.EmployeeId == id).ToListAsync();
                 if (tr.Count != 0) {
@@ -77,6 +84,27 @@ namespace Fitnes.Storage.Manager.Employers {
             await context.Positions.ForEachAsync(elem => listPositions.Add(new KeyValuePair<int, string>(elem.PositionId, elem.Name)));
             await context.Gyms.ForEachAsync(elem => listGyms.Add(new KeyValuePair<int, string>(elem.GymId, elem.Name)));
             return (listPositions, listGyms);
+        }
+        public List<EmployeeWithPositionAndGymName> SearchEmployee(string text, int term) {
+            var list = new List<EmployeeWithPositionAndGymName>();
+            foreach (var elem in context.Employees) {
+                list.Add(new EmployeeWithPositionAndGymName() {
+                    Id = elem.EmployeeId,
+                    Name = elem.Name,
+                    PositionName = context.Positions.Find(elem.PositionId).Name,
+                    Experience = elem.Experience,
+                    Salary = elem.Salary,
+                    GymName = elem.GymId != null ? context.Gyms.Find(elem.GymId).Name : null
+                });
+            }
+            switch (term) {
+                case 1: return list.Where(c => c.PositionName.IndexOf(text) >= 0).ToList();
+                case 2: return list.Where(c => c.Name.IndexOf(text) >= 0).ToList();
+                case 3: return list.Where(c => c.Experience == Convert.ToInt32(text)).ToList();
+                case 4: return list.Where(c => c.Salary == Convert.ToInt32(text)).ToList();
+                case 5: return list.Where(c => c.GymName.IndexOf(text) >= 0).ToList();
+                default: throw new ArgumentNullException();
+            }
         }
     }
 }

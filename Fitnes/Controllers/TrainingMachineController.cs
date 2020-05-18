@@ -6,6 +6,7 @@ using Fitnes.Storage.Manager.TrainingMachines;
 using Fitnes.Storage;
 using Fitnes.Storage.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fitnes.Controllers
 {
@@ -32,6 +33,9 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not add new training machine", call = nameof(TrainingMachine) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(TrainingMachine) });
+            }
         }
         [HttpGet]
         public async Task<ActionResult> UpdateTrainingMachine(int id) {
@@ -41,6 +45,9 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not find training machine with this id", call = nameof(TrainingMachine) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(TrainingMachine) });
             }
         }
         [HttpPost]
@@ -52,6 +59,9 @@ namespace Fitnes.Controllers
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not update training machine", call = nameof(TrainingMachine) });
             }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(TrainingMachine) });
+            }
 
         }
         [HttpGet]
@@ -62,6 +72,9 @@ namespace Fitnes.Controllers
             }
             catch (ArgumentNullException) {
                 return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: can not delete training machine", call = nameof(TrainingMachine) });
+            }
+            catch (DbUpdateException) {
+                return RedirectToAction("ErrorPage", nameof(Main), new { message = "Error: invalid input", call = nameof(TrainingMachine) });
             }
         }
     }

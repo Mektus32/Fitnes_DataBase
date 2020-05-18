@@ -40,7 +40,7 @@ namespace Fitnes.Storage {
                 new Client[] {
                     new Client { ClientId = 1, Name = "Mike", LastName = "Tarasyan", TrainerId = 1, SubscriptionId = 1 },
                     new Client { ClientId = 2, Name = "Ayka", LastName = "Islanova", TrainerId = 2, SubscriptionId = 2 },
-                    new Client { ClientId = 3, Name = "Mike", LastName = "Sharshan", TrainerId = null, SubscriptionId = 3 },
+                    new Client { ClientId = 3, Name = "Mike", LastName = "Sharshan", TrainerId = 1, SubscriptionId = 3 },
                     new Client { ClientId = 4, Name = "Dima", LastName = "Konopkin", TrainerId = 1, SubscriptionId = 1 }
                 });
             modelBuilder.Entity<Gym>().HasData(
@@ -67,10 +67,10 @@ namespace Fitnes.Storage {
                 new Employee[] {
                     new Employee { EmployeeId = 1, PositionId = 1, Name = "Ivan", Experience = 0, Salary = 20, GymId = 1 },
                     new Employee { EmployeeId = 2, PositionId = 2, Name = "Vadim", Experience = 2, Salary = 50, GymId = 1 },
-                    new Employee { EmployeeId = 3, PositionId = 3, Name = "Anton", Experience = 0.5, Salary = 30, GymId = 1 },
+                    new Employee { EmployeeId = 3, PositionId = 3, Name = "Anton", Experience = 5, Salary = 30, GymId = 1 },
                     new Employee { EmployeeId = 4, PositionId = 1, Name = "Kate", Experience = 0, Salary = 20, GymId = 2 },
                     new Employee { EmployeeId = 5, PositionId = 2, Name = "Liza", Experience = 2, Salary = 50, GymId = 2 },
-                    new Employee { EmployeeId = 6, PositionId = 3, Name = "Dasha", Experience = 0.5, Salary = 30, GymId = 2 }
+                    new Employee { EmployeeId = 6, PositionId = 3, Name = "Dasha", Experience = 5, Salary = 30, GymId = 2 }
                 });
             modelBuilder.Entity<Position>().HasData(
                 new Position[] {

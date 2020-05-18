@@ -7,7 +7,7 @@ namespace Fitnes.Storage.Manager.Employers {
     public class CreateOrUpdateEmployeeRequest {
         public string Name { get; set; }
         public int PositionId { get; set; }
-        public double Experience { get; set; }
+        public int Experience { get; set; }
         public ushort Salary { get; set; }
         public int GymId { get; set; }
     }

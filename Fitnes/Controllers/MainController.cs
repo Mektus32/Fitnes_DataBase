@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Fitnes.Controllers {
     public class Main : Controller
     {
-        public ViewResult ErrorPage(string message, string call) {
-            List<string> list = new List<string>() { message, call, "Show" + call + 's' , "Show " + call};
+        public ViewResult ErrorPage(string message, string call, string output = "Error!") {
+            List<string> list = new List<string>() { message, call, "Show" + call + 's' , "Show " + call, output};
             return View(list);
         }
         public IActionResult MainPage()
